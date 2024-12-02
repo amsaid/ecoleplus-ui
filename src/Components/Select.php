@@ -30,6 +30,11 @@ class Select extends BaseComponent
         ];
     }
 
+    public function getClasses(): string
+    {
+        return $this->mergeClasses($this->classes);
+    }
+
     public function render()
     {
         return view('ecoleplus-ui::components.select');

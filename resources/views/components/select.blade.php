@@ -7,7 +7,7 @@
 
     <select
         {{ $attributes->merge([
-            'class' => $mergeClasses($classes),
+            'class' => $getClasses(),
             'disabled' => $disabled
         ]) }}
     >
