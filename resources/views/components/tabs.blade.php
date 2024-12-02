@@ -2,7 +2,10 @@
     selectedTab: null,
     init() {
         // Initialize with first tab
-        this.selectedTab = this.$refs.tabs.children[0]?.id
+        this.$nextTick(() => {
+            const firstTab = this.$refs.tabs.querySelector('[role="tab"]')
+            this.selectedTab = firstTab?.id
+        })
     },
     isSelected(id) {
         return this.selectedTab === id

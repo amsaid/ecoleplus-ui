@@ -28,4 +28,24 @@ class Tab extends BaseComponent
     {
         return view('ecoleplus-ui::components.tab');
     }
+
+    /**
+     * Get the tab button classes.
+     *
+     * @return string
+     */
+    public function tabClasses(): string
+    {
+        return $this->getDefaultClasses('tabs', 'tab');
+    }
+
+    /**
+     * Get the active tab classes.
+     *
+     * @return string
+     */
+    public function activeTabClasses(): string
+    {
+        return $this->getDefaultClasses('tabs', 'tab.active');
+    }
 } 
