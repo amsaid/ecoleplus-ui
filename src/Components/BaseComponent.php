@@ -40,7 +40,7 @@ abstract class BaseComponent extends Component
      * @param string|array $classes
      * @return string
      */
-    public function mergeClasses($classes): string
+    protected function mergeClasses($classes): string
     {
         if (is_string($classes)) {
             $classes = explode(' ', $classes);
@@ -86,3 +86,68 @@ abstract class BaseComponent extends Component
     {
         return $sizes[$size] ?? $sizes['md'] ?? '';
     }
+
+    /**
+     * Determine if a given class exists in the class list.
+     *
+     * @param string $class
+     * @return bool
+     */
+    protected function hasClass(string $class): bool
+    {
+        return Str::contains($this->classes, $class);
+    }
+
+    /**
+     * Add a class or array of classes to the component.
+     *
+     * @param string|array $classes
+     * @return $this
+     */
+    public function addClass($classes)
+    {
+        $this->classes = array_merge(
+            $this->classes,
+            is_array($classes) ? $classes : explode(' ', $classes)
+        );
+
+        return $this;
+    }
+
+    /**
+     * Remove a class or array of classes from the component.
+     *
+     * @param string|array $classes
+     * @return $this
+     */
+    public function removeClass($classes)
+    {
+        $remove = is_array($classes) ? $classes : explode(' ', $classes);
+        $this->classes = array_diff($this->classes, $remove);
+
+        return $this;
+    }
+
+    /**
+     * Get an attribute's value from the component.
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    protected function getAttribute(string $key, $default = null)
+    {
+        return Arr::get($this->attributes->getAttributes(), $key, $default);
+    }
+
+    /**
+     * Determine if the component has the given attribute.
+     *
+     * @param string $key
+     * @return bool
+     */
+    protected function hasAttribute(string $key): bool
+    {
+        return $this->attributes->has($key);
+    }
+}
