@@ -5,6 +5,11 @@ namespace Ecoleplus\EcoleplusUi\Components;
 class Popover extends BaseComponent
 {
     /**
+     * Available placements.
+     */
+    const PLACEMENTS = ['top', 'bottom', 'left', 'right'];
+
+    /**
      * The popover placement.
      *
      * @var string
@@ -18,11 +23,13 @@ class Popover extends BaseComponent
      */
     public function __construct(string $placement = 'bottom')
     {
-        $this->placement = $placement;
+        if (!in_array($placement, self::PLACEMENTS)) {
+            $placement = 'bottom';
+        }
 
+        $this->placement = $placement;
         $this->defaultClasses = [
             $this->getDefaultClasses('popover'),
-            $this->getDefaultClasses('popover', 'placement.'.$placement),
         ];
     }
 

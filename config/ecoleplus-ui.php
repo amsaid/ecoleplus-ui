@@ -102,12 +102,12 @@ return [
             ],
         ],
         'popover' => [
-            'base' => 'absolute z-50 p-4 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700',
+            'base' => 'absolute z-50 p-4 bg-white rounded-lg shadow-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:max-w-sm',
             'placement' => [
-                'top' => '-translate-y-2 bottom-full mb-2',
-                'bottom' => 'translate-y-2 top-full mt-2',
-                'left' => '-translate-x-2 right-full mr-2',
-                'right' => 'translate-x-2 left-full ml-2',
+                'top' => '',
+                'bottom' => '',
+                'left' => '',
+                'right' => '',
             ],
         ],
     ],
