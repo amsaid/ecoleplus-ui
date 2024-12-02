@@ -26,14 +26,14 @@ class Tabs extends BaseComponent
          *
          * @var string
          */
-        string $style = 'underline',
+        public string $style = 'underline',
 
         /**
          * The tabs orientation.
          *
          * @var string
          */
-        string $orientation = 'horizontal'
+        public string $orientation = 'horizontal'
     ) {
         if (!in_array($this->style, self::STYLES)) {
             $this->style = 'underline';
