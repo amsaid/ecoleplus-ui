@@ -14,25 +14,11 @@ class Tabs extends BaseComponent
      */
     const ORIENTATIONS = ['horizontal', 'vertical'];
 
-    
-
     /**
      * Create a new component instance.
      */
     public function __construct(
-
-        /**
-         * The tabs style.
-         *
-         * @var string
-         */
         public string $style = 'underline',
-
-        /**
-         * The tabs orientation.
-         *
-         * @var string
-         */
         public string $orientation = 'horizontal'
     ) {
         if (!in_array($this->style, self::STYLES)) {
@@ -45,8 +31,12 @@ class Tabs extends BaseComponent
 
         $this->defaultClasses = [
             $this->getDefaultClasses('tabs', 'base'),
-            $this->style === 'underline' ? $this->getDefaultClasses('tabs', 'underline.base') : '',
         ];
+
+        // Add style-specific base classes if they exist
+        if ($baseClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.base')) {
+            $this->defaultClasses[] = $baseClasses;
+        }
     }
 
     /**

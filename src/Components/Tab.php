@@ -44,10 +44,16 @@ class Tab extends BaseComponent
      */
     public function tabClasses(): string
     {
-        return $this->mergeClasses([
+        $classes = [
             $this->getDefaultClasses('tabs', 'tab'),
-            $this->getDefaultClasses('tabs', $this->style.'.tab'),
-        ]);
+        ];
+
+        // Add style-specific classes if they exist
+        if ($styleClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.tab')) {
+            $classes[] = $styleClasses;
+        }
+
+        return $this->mergeClasses($classes);
     }
 
     /**
@@ -57,10 +63,16 @@ class Tab extends BaseComponent
      */
     public function activeTabClasses(): string
     {
-        return $this->mergeClasses([
+        $classes = [
             $this->tabClasses(),
             $this->getDefaultClasses('tabs', 'tab_active'),
-            $this->getDefaultClasses('tabs', $this->style.'.tab_active'),
-        ]);
+        ];
+
+        // Add style-specific active classes if they exist
+        if ($styleActiveClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.tab_active')) {
+            $classes[] = $styleActiveClasses;
+        }
+
+        return $this->mergeClasses($classes);
     }
 } 
