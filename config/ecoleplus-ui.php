@@ -160,13 +160,25 @@ return [
         ],
         'tabs' => [
             'base' => 'w-full',
-            'tab' => 'px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none',
-            'tab.active' => 'text-primary-600',
-            'pills' => 'space-x-1',
-            'underline' => 'border-b border-gray-200',
+            'tab' => 'inline-flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+            'tab.active' => 'text-primary-700 bg-primary-50 hover:bg-primary-100',
+            'pills' => [
+                'tab' => 'rounded-md hover:bg-gray-100',
+                'tab.active' => 'rounded-md bg-primary-100 text-primary-700 hover:bg-primary-200',
+            ],
+            'underline' => [
+                'base' => 'border-b border-gray-200',
+                'tab' => 'border-b-2 border-transparent -mb-px hover:border-gray-300 hover:text-gray-700',
+                'tab.active' => 'border-b-2 border-primary-500 text-primary-600',
+            ],
             'orientation' => [
-                'horizontal' => 'flex-row',
-                'vertical' => 'flex-col',
+                'horizontal' => 'flex-row space-x-2',
+                'vertical' => 'flex-col space-y-2',
+            ],
+            'panel' => [
+                'base' => 'focus:outline-none',
+                'horizontal' => 'mt-4',
+                'vertical' => 'mt-0 ml-4',
             ],
         ],
         'progress' => [
