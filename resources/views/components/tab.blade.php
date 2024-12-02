@@ -1,9 +1,5 @@
 @aware(['orientation', 'style'])
 
-@php
-    $this->style = $style ?? 'underline';
-@endphp
-
 <button
     id="{{ $id }}"
     type="button"

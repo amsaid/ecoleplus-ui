@@ -3,7 +3,7 @@
     init() {
         // Initialize with first tab
         this.$nextTick(() => {
-            const firstTab = this.$refs.tabs.querySelector(&#34;[role='tab']&#34;)
+            const firstTab = this.$refs.tabs.querySelector('[role="tab"]')
             this.selectedTab = firstTab?.id
         })
     },
@@ -25,4 +25,4 @@
     </div>
 </div>
 
-@aware(['orientation', 'style'])
+@props(['style' => 'underline', 'orientation' => 'horizontal'])
