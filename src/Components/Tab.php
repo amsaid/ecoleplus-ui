@@ -34,14 +34,14 @@ class Tab extends BaseComponent
      *
      * @return string
      */
-    public function tabClasses(): string
+    public function tabClasses($style = 'underline'): string
     {
         $classes = [
             $this->getDefaultClasses('tabs', 'tab'),
         ];
 
         // Add style-specific classes if they exist
-        if ($styleClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.tab')) {
+        if ($styleClasses = $this->getDefaultClasses('tabs', 'styles.'.$style.'.tab')) {
             $classes[] = $styleClasses;
         }
 
@@ -53,7 +53,7 @@ class Tab extends BaseComponent
      *
      * @return string
      */
-    public function activeTabClasses(): string
+    public function activeTabClasses($style = 'underline'): string
     {
         $classes = [
             $this->tabClasses(),
@@ -61,7 +61,7 @@ class Tab extends BaseComponent
         ];
 
         // Add style-specific active classes if they exist
-        if ($styleActiveClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.tab_active')) {
+        if ($styleActiveClasses = $this->getDefaultClasses('tabs', 'styles.'.$style.'.tab_active')) {
             $classes[] = $styleActiveClasses;
         }
 

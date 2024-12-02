@@ -6,7 +6,7 @@
     role="tab"
     :aria-selected="isSelected('{{ $id }}')"
     :aria-controls="'{{ $id }}' + '-panel'"
-    :class="{ '{{ $activeTabClasses() }}': isSelected('{{ $id }}'), '{{ $tabClasses() }}': !isSelected('{{ $id }}') }"
+    :class="{ '{{ $activeTabClasses($style) }}': isSelected('{{ $id }}'), '{{ $tabClasses($style) }}': !isSelected('{{ $id }}') }"
     @click="selectTab('{{ $id }}')"
     @keydown.right.prevent="orientation !== 'vertical' && $el.nextElementSibling?.focus()"
     @keydown.left.prevent="orientation !== 'vertical' && $el.previousElementSibling?.focus()"
