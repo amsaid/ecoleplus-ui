@@ -31,13 +31,13 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
             ->name('ecoleplus-ui')
             ->hasConfigFile()
             ->hasViews()
-            ->hasViewComponents($this->prefix, [
+            ->hasViewComponents($this->prefix,
                 Button::class,
                 Card::class,
                 CardSection::class,
                 Input::class,
-                Select::class,
-            ])
+                Select::class
+            )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)
             ;
