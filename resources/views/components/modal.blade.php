@@ -1,4 +1,8 @@
-<div x-data="{ open: false }"
+@props(['open' => false])
+
+<div x-data="{ open: @js($open) }"
+    @close.window="open = false"
+    x-on:keydown.escape.window="open = false"
     x-show="open"
     x-cloak
     class="relative z-50"
@@ -33,3 +37,10 @@
         </div>
     </div>
 </div>
+
+{{-- Trigger --}}
+@isset($trigger)
+    <div @click="open = true">
+        {{ $trigger }}
+    </div>
+@endisset
