@@ -1,5 +1,4 @@
 <?php
-
 namespace Ecoleplus\EcoleplusUi\Components;
 
 class Input extends BaseComponent
@@ -30,5 +29,11 @@ class Input extends BaseComponent
     public function render()
     {
         return view('ecoleplus-ui::components.input');
+    }
+
+    // Add this method to get the computed classes
+    public function getClasses(): string
+    {
+        return $this->mergeClasses($this->classes);
     }
 }

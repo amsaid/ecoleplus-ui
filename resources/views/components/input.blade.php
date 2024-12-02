@@ -1,4 +1,4 @@
-div>
+<div>
     @if($label)
         <label class="block text-sm font-medium text-gray-700 mb-1">
             {{ $label }}
@@ -9,7 +9,7 @@ div>
         <input
             type="{{ $type }}"
             {{ $attributes->merge([
-                'class' => $mergeClasses($classes),
+                'class' => $getClasses(),
                 'disabled' => $disabled
             ]) }}
         >
