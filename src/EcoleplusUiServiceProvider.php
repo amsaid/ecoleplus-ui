@@ -8,14 +8,15 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Ecoleplus\EcoleplusUi\Components\{
     Button,
-    Card,
-    CardSection,
     Input,
+    CardSection,
     Select,
     Form,
     FormGroup,
     FormActions,
-    Spinner
+    Spinner,
+    Popover,
+    Card
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -35,16 +36,17 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
             ->name('ecoleplus-ui')
             ->hasConfigFile()
             ->hasViews()
-            ->hasViewComponents($this->prefix,
+            ->hasComponents(
                 Button::class,
-                Card::class,
-                CardSection::class,
                 Input::class,
+                CardSection::class,
                 Select::class,
                 Form::class,
                 FormGroup::class,
                 FormActions::class,
-                Spinner::class
+                Spinner::class,
+                Popover::class,
+                Card::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)
