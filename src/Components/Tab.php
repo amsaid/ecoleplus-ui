@@ -45,8 +45,8 @@ class Tab extends BaseComponent
     public function tabClasses(): string
     {
         return $this->mergeClasses([
-            $this->getDefaultClasses('tabs', 'tab'),
-            $this->getDefaultClasses('tabs', $this->style.'.tab'),
+            $this->getDefaultClasses('tabs', 'tab.base'),
+            $this->getDefaultClasses('tabs', $this->style.'.tab.base'),
         ]);
     }
 
