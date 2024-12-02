@@ -62,7 +62,15 @@ return [
             'base' => 'last:border-b-0 p-4 border-b border-gray-200 dark:border-gray-700',
         ],
         'select' => [
-            'base' => 'border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-primary-400 dark:focus:border-primary-400',
+            'base' => 'block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:focus:ring-primary-400 dark:focus:border-primary-400',
+            'error' => 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 dark:border-red-600 dark:text-red-300 dark:focus:ring-red-400 dark:focus:border-red-400',
+            'disabled' => 'bg-gray-100 cursor-not-allowed dark:bg-gray-800',
+            'label' => 'block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300',
+            'help' => 'mt-1 text-sm text-gray-500 dark:text-gray-400',
+            'error-text' => 'mt-1 text-sm text-red-600 dark:text-red-400',
+            'prefix' => 'absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400',
+            'suffix' => 'absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400',
+            'wrapper' => 'relative rounded-md shadow-sm',
         ],
         'checkbox' => [
             'base' => 'rounded border-gray-300 text-primary-600 shadow-sm focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:checked:bg-primary-500 dark:focus:ring-primary-400 dark:focus:ring-offset-gray-900',
