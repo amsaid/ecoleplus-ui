@@ -36,7 +36,7 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
             ->name('ecoleplus-ui')
             ->hasConfigFile()
             ->hasViews()
-            ->hasComponents(
+            ->hasViewComponents($this->prefix,
                 Button::class,
                 Input::class,
                 CardSection::class,
