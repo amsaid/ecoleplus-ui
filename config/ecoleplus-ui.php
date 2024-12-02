@@ -124,6 +124,40 @@ return [
                 'full' => 'sm:max-w-[90vw]',
             ],
         ],
+        'alert' => [
+            'base' => 'rounded-lg',
+            'success' => 'bg-green-50 text-green-800',
+            'error' => 'bg-red-50 text-red-800',
+            'warning' => 'bg-yellow-50 text-yellow-800',
+            'info' => 'bg-blue-50 text-blue-800',
+        ],
+        'badge' => [
+            'base' => 'inline-flex items-center rounded-full font-medium',
+            'dot' => 'inline-block h-2 w-2 rounded-full',
+            'size' => [
+                'xs' => 'px-2 py-0.5 text-xs',
+                'sm' => 'px-2.5 py-0.5 text-sm',
+                'md' => 'px-3 py-1 text-sm',
+                'lg' => 'px-4 py-1.5 text-base',
+            ],
+            'primary' => 'bg-primary-100 text-primary-800',
+            'secondary' => 'bg-gray-100 text-gray-800',
+            'success' => 'bg-green-100 text-green-800',
+            'danger' => 'bg-red-100 text-red-800',
+            'warning' => 'bg-yellow-100 text-yellow-800',
+            'info' => 'bg-blue-100 text-blue-800',
+        ],
+        'avatar' => [
+            'base' => 'relative inline-block',
+            'size' => [
+                'xs' => 'h-6 w-6',
+                'sm' => 'h-8 w-8',
+                'md' => 'h-10 w-10',
+                'lg' => 'h-12 w-12',
+                'xl' => 'h-14 w-14',
+            ],
+            'initials' => 'flex h-full w-full items-center justify-center rounded-full bg-gray-100 text-gray-600 font-medium',
+        ],
     ],
 
     /*
