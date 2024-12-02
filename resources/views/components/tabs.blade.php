@@ -3,7 +3,7 @@
     init() {
         // Initialize with first tab
         this.$nextTick(() => {
-            const firstTab = this.$refs.tabs.querySelector('[role=\\"tab\\"]')
+            const firstTab = this.$refs.tabs.querySelector(&#34;[role='tab']&#34;)
             this.selectedTab = firstTab?.id
         })
     },
