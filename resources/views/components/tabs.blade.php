@@ -1,9 +1,9 @@
-<div x-data="{ 
+<div x-data="{
     selectedTab: null,
     init() {
         // Initialize with first tab
         this.$nextTick(() => {
-            const firstTab = this.$refs.tabs.querySelector('[role=\"tab\"]')
+            const firstTab = this.$refs.tabs.querySelector('[role=\\"tab\\"]')
             this.selectedTab = firstTab?.id
         })
     },
@@ -25,4 +25,4 @@
     </div>
 </div>
 
-@aware(['orientation']) 
+@aware(['orientation'])
