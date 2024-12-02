@@ -11,7 +11,9 @@ use Ecoleplus\EcoleplusUi\Components\{
     Card,
     CardSection,
     Input,
-    Select
+    Select,
+    Form,
+    FormGroup
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -36,7 +38,9 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Card::class,
                 CardSection::class,
                 Input::class,
-                Select::class
+                Select::class,
+                Form::class,
+                FormGroup::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)

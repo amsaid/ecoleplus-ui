@@ -78,6 +78,14 @@ return [
         'radio' => [
             'base' => 'border-gray-300 text-primary-600 shadow-sm focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:checked:bg-primary-500 dark:focus:ring-primary-400 dark:focus:ring-offset-gray-900',
         ],
+        'form' => [
+            'base' => 'space-y-6',
+            'group' => 'space-y-2',
+            'label' => 'block text-sm font-medium text-gray-700 dark:text-gray-300',
+            'help' => 'mt-1 text-sm text-gray-500 dark:text-gray-400',
+            'error' => 'mt-1 text-sm text-red-600 dark:text-red-400',
+            'actions' => 'flex items-center justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700',
+        ],
     ],
 
     /*

@@ -26,7 +26,7 @@ class CardSection extends BaseComponent
      */
     public function __construct(
         string $type = 'default',
-        bool $bordered = true
+        bool $bordered = false
     ) {
         $this->type = $type;
         $this->bordered = $bordered;
