@@ -45,7 +45,15 @@ return [
             'outline-dark' => 'border-2 border-gray-800 text-gray-800 bg-transparent hover:bg-gray-100 focus:ring-gray-500',
         ],
         'input' => [
-            'base' => 'border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-md shadow-sm',
+            'base' => 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm',
+            'error' => 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500',
+            'disabled' => 'bg-gray-100 cursor-not-allowed',
+            'label' => 'block text-sm font-medium text-gray-700 mb-1',
+            'help' => 'mt-1 text-sm text-gray-500',
+            'error-text' => 'mt-1 text-sm text-red-600',
+            'prefix' => 'absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none',
+            'suffix' => 'absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none',
+            'wrapper' => 'relative rounded-md shadow-sm',
         ],
         'card' => [
             'base' => 'overflow-hidden',
