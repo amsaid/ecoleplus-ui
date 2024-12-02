@@ -110,6 +110,20 @@ return [
                 'right' => '',
             ],
         ],
+        'dropdown' => [
+            'base' => 'absolute right-0 z-50 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700',
+        ],
+        'modal' => [
+            'base' => 'relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all dark:bg-gray-800 sm:my-8 sm:w-full sm:max-w-lg sm:p-6',
+            'size' => [
+                'sm' => 'sm:max-w-sm',
+                'md' => 'sm:max-w-lg',
+                'lg' => 'sm:max-w-xl',
+                'xl' => 'sm:max-w-2xl',
+                '2xl' => 'sm:max-w-3xl',
+                'full' => 'sm:max-w-full',
+            ],
+        ],
     ],
 
     /*

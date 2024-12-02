@@ -16,7 +16,9 @@ use Ecoleplus\EcoleplusUi\Components\{
     FormActions,
     Spinner,
     Popover,
-    Card
+    Card,
+    Dropdown,
+    Modal
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -46,7 +48,9 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 FormActions::class,
                 Spinner::class,
                 Popover::class,
-                Card::class
+                Card::class,
+                Dropdown::class,
+                Modal::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)
