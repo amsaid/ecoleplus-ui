@@ -14,37 +14,34 @@ class Tabs extends BaseComponent
      */
     const ORIENTATIONS = ['horizontal', 'vertical'];
 
-    /**
-     * The tabs style.
-     *
-     * @var string
-     */
-    public string $style;
-
-    /**
-     * The tabs orientation.
-     *
-     * @var string
-     */
-    public string $orientation;
+    
 
     /**
      * Create a new component instance.
      */
     public function __construct(
+
+        /**
+         * The tabs style.
+         *
+         * @var string
+         */
         string $style = 'underline',
+
+        /**
+         * The tabs orientation.
+         *
+         * @var string
+         */
         string $orientation = 'horizontal'
     ) {
-        if (!in_array($style, self::STYLES)) {
-            $style = 'underline';
+        if (!in_array($this->style, self::STYLES)) {
+            $this->style = 'underline';
         }
 
-        if (!in_array($orientation, self::ORIENTATIONS)) {
-            $orientation = 'horizontal';
+        if (!in_array($this->orientation, self::ORIENTATIONS)) {
+            $this->orientation = 'horizontal';
         }
-
-        $this->style = $style;
-        $this->orientation = $orientation;
 
         $this->defaultClasses = [
             $this->getDefaultClasses('tabs', 'base'),
