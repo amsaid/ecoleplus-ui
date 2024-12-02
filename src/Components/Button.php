@@ -109,7 +109,7 @@ class Button extends BaseComponent
 
         $this->defaultClasses = [
             $this->getDefaultClasses('button'),
-            $this->getColorClasses($variant, 'button'),
+            $this->getColorClasses('variant.'.$variant, 'button'),
         ];
     }
 
