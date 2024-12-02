@@ -1,10 +1,13 @@
 @props([
     'type' => 'text',
+    'value' => null,
+    'placeholder' => null,
     'label' => null,
     'error' => null,
     'help' => null,
     'prefix' => null,
     'suffix' => null,
+    'rows' => 3,
 ])
 
 <div>
@@ -21,10 +24,25 @@
             </div>
         @endif
 
-        <input 
-            type="{{ $type }}"
-            {{ $attributes->merge(['class' => $classes()]) }}
-        >
+        @if($type === 'textarea')
+            <textarea
+                {{ $attributes->merge(['class' => $classes()]) }}
+                rows="{{ $rows }}"
+                placeholder="{{ $placeholder }}"
+            >{{ $value }}</textarea>
+        @elseif($type === 'file')
+            <input
+                type="file"
+                {{ $attributes->merge(['class' => $classes()]) }}
+            />
+        @else
+            <input
+                type="{{ $type }}"
+                value="{{ $value }}"
+                placeholder="{{ $placeholder }}"
+                {{ $attributes->merge(['class' => $classes()]) }}
+            />
+        @endif
 
         @if($suffix)
             <div class="{{ $suffixClasses() }}">

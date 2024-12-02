@@ -6,77 +6,55 @@ class Input extends BaseComponent
 {
     /**
      * The input type.
-     *
-     * @var string
      */
     public string $type;
 
     /**
-     * The input label.
-     *
-     * @var string|null
+     * The input value.
      */
-    public ?string $label;
+    public mixed $value;
 
     /**
-     * The error message.
-     *
-     * @var string|null
+     * The input placeholder.
      */
-    public ?string $error;
-
-    /**
-     * The help text.
-     *
-     * @var string|null
-     */
-    public ?string $help;
+    public ?string $placeholder;
 
     /**
      * The prefix content.
-     *
-     * @var string|null
      */
     public ?string $prefix;
 
     /**
      * The suffix content.
-     *
-     * @var string|null
      */
     public ?string $suffix;
+
+    /**
+     * The textarea rows.
+     */
+    public int $rows;
 
     /**
      * Create a new component instance.
      */
     public function __construct(
         string $type = 'text',
-        ?string $label = null,
-        ?string $error = null,
-        ?string $help = null,
+        mixed $value = null,
+        ?string $placeholder = null,
         ?string $prefix = null,
         ?string $suffix = null,
-        bool $disabled = false
+        int $rows = 3
     ) {
         $this->type = $type;
-        $this->label = $label;
-        $this->error = $error;
-        $this->help = $help;
+        $this->value = $value;
+        $this->placeholder = $placeholder;
         $this->prefix = $prefix;
         $this->suffix = $suffix;
-        $this->disabled = $disabled;
-
-        $this->defaultClasses = [
-            $this->getDefaultClasses('input', 'base'),
-            $this->error ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500' : '',
-            $this->disabled ? 'bg-gray-100 cursor-not-allowed' : '',
-        ];
+        $this->rows = $rows;
     }
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
      */
     public function render()
     {
@@ -84,27 +62,7 @@ class Input extends BaseComponent
     }
 
     /**
-     * Get all the computed classes for the input.
-     *
-     * @return string
-     */
-    public function classes(): string
-    {
-        $classes = [
-            $this->getDefaultClasses('input'),
-            $this->error ? $this->getDefaultClasses('input', 'error') : '',
-            $this->disabled ? $this->getDefaultClasses('input', 'disabled') : '',
-            $this->prefix ? 'pl-10' : '',
-            $this->suffix ? 'pr-10' : '',
-        ];
-
-        return $this->mergeClasses($classes);
-    }
-
-    /**
-     * Get the wrapper classes.
-     *
-     * @return string
+     * Get the input wrapper classes.
      */
     public function wrapperClasses(): string
     {
@@ -112,39 +70,25 @@ class Input extends BaseComponent
     }
 
     /**
-     * Get the label classes.
-     *
-     * @return string
+     * Get the input classes.
      */
-    public function labelClasses(): string
+    public function classes(): string
     {
-        return $this->getDefaultClasses('input', 'label');
+        $baseClasses = $this->getDefaultClasses('input', 'base');
+
+        if ($this->type === 'file') {
+            return $this->getDefaultClasses('input', 'file');
+        }
+
+        if ($this->type === 'textarea') {
+            return $this->getDefaultClasses('input', 'textarea');
+        }
+
+        return $baseClasses;
     }
 
     /**
-     * Get the help text classes.
-     *
-     * @return string
-     */
-    public function helpClasses(): string
-    {
-        return $this->getDefaultClasses('input', 'help');
-    }
-
-    /**
-     * Get the error message classes.
-     *
-     * @return string
-     */
-    public function errorClasses(): string
-    {
-        return $this->getDefaultClasses('input', 'error-text');
-    }
-
-    /**
-     * Get the prefix classes.
-     *
-     * @return string
+     * Get the prefix wrapper classes.
      */
     public function prefixClasses(): string
     {
@@ -152,9 +96,7 @@ class Input extends BaseComponent
     }
 
     /**
-     * Get the suffix classes.
-     *
-     * @return string
+     * Get the suffix wrapper classes.
      */
     public function suffixClasses(): string
     {
