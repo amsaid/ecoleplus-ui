@@ -1,3 +1,5 @@
+@aware(['orientation', 'style'])
+
 <div
     id="{{ $id }}-panel"
     role="tabpanel"

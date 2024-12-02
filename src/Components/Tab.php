@@ -12,11 +12,19 @@ class Tab extends BaseComponent
     public string $id;
 
     /**
+     * The tab style from parent.
+     *
+     * @var string
+     */
+    public string $style;
+
+    /**
      * Create a new component instance.
      */
     public function __construct(string $id)
     {
         $this->id = $id;
+        $this->style = 'underline'; // Default style
     }
 
     /**
