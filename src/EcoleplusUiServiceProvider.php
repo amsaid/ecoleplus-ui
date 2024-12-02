@@ -23,6 +23,8 @@ use Ecoleplus\EcoleplusUi\Components\{
     Badge,
     Avatar,
     Tabs,
+    Tab,
+    TabPanel,
     Progress,
     Toast
 };
@@ -61,6 +63,8 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Badge::class,
                 Avatar::class,
                 Tabs::class,
+                Tab::class,
+                TabPanel::class,
                 Progress::class,
                 Toast::class
             )
