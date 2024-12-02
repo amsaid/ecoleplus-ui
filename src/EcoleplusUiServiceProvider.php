@@ -14,7 +14,8 @@ use Ecoleplus\EcoleplusUi\Components\{
     Select,
     Form,
     FormGroup,
-    FormActions
+    FormActions,
+    Spinner
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -42,7 +43,8 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Select::class,
                 Form::class,
                 FormGroup::class,
-                FormActions::class
+                FormActions::class,
+                Spinner::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)
