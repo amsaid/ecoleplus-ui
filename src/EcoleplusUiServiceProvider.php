@@ -21,7 +21,10 @@ use Ecoleplus\EcoleplusUi\Components\{
     Modal,
     Alert,
     Badge,
-    Avatar
+    Avatar,
+    Tabs,
+    Progress,
+    Toast
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -56,7 +59,10 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Modal::class,
                 Alert::class,
                 Badge::class,
-                Avatar::class
+                Avatar::class,
+                Tabs::class,
+                Progress::class,
+                Toast::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)

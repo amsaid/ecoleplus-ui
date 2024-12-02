@@ -158,6 +158,47 @@ return [
             ],
             'initials' => 'flex h-full w-full items-center justify-center rounded-full bg-gray-100 text-gray-600 font-medium',
         ],
+        'tabs' => [
+            'base' => 'w-full',
+            'tab' => 'px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none',
+            'tab.active' => 'text-primary-600',
+            'pills' => 'space-x-1',
+            'underline' => 'border-b border-gray-200',
+            'orientation' => [
+                'horizontal' => 'flex-row',
+                'vertical' => 'flex-col',
+            ],
+        ],
+        'progress' => [
+            'base' => 'w-full',
+            'size' => [
+                'xs' => 'h-1',
+                'sm' => 'h-2',
+                'md' => 'h-3',
+                'lg' => 'h-4',
+            ],
+            'primary' => 'bg-primary-600',
+            'secondary' => 'bg-gray-600',
+            'success' => 'bg-green-600',
+            'danger' => 'bg-red-600',
+            'warning' => 'bg-yellow-600',
+            'info' => 'bg-blue-600',
+            'label' => 'absolute right-0 -top-6 text-xs font-medium',
+        ],
+        'toast' => [
+            'base' => 'max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto overflow-hidden',
+            'success' => 'border-l-4 border-green-500',
+            'error' => 'border-l-4 border-red-500',
+            'warning' => 'border-l-4 border-yellow-500',
+            'info' => 'border-l-4 border-blue-500',
+            'icon' => 'h-6 w-6',
+            'position' => [
+                'top-right' => 'fixed top-4 right-4',
+                'top-left' => 'fixed top-4 left-4',
+                'bottom-right' => 'fixed bottom-4 right-4',
+                'bottom-left' => 'fixed bottom-4 left-4',
+            ],
+        ],
     ],
 
     /*
