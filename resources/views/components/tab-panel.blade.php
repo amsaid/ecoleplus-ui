@@ -1,8 +1,8 @@
 <div
-    :id="@js($id) + '-panel'"
+    id="{{ $id }}-panel"
     role="tabpanel"
-    :aria-labelledby="@js($id)"
-    x-show="isSelected(@js($id))"
+    :aria-labelledby="'{{ $id }}'"
+    x-show="isSelected('{{ $id }}')"
     x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="opacity-0"
     x-transition:enter-end="opacity-100"
