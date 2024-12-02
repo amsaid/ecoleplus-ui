@@ -160,23 +160,16 @@ return [
         ],
         'tabs' => [
             'base' => 'w-full',
-            'tab' => [
-                'base' => 'inline-flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-                'active' => 'text-primary-700 bg-primary-50 hover:bg-primary-100',
-            
-            ],
+            'tab' => 'inline-flex items-center justify-center px-3 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+            'tab_active' => 'text-primary-700 bg-primary-50 hover:bg-primary-100',
             'pills' => [
-                'tab' => [
-                    'base' => 'rounded-md hover:bg-gray-100',
-                    'active' => 'rounded-md bg-primary-100 text-primary-700 hover:bg-primary-200',
-                ],
+                'tab' => 'rounded-md hover:bg-gray-100',
+                'tab_active' => 'rounded-md bg-primary-100 text-primary-700 hover:bg-primary-200',
             ],
             'underline' => [
                 'base' => 'border-b border-gray-200',
-                'tab' => [
-                    'base' => 'border-b-2 border-transparent -mb-px hover:border-gray-300 hover:text-gray-700',
-                    'active' => 'border-b-2 border-primary-500 text-primary-600',
-                ],
+                'tab' => 'border-b-2 border-transparent -mb-px hover:border-gray-300 hover:text-gray-700',
+                'tab_active' => 'border-b-2 border-primary-500 text-primary-600',
             ],
             'orientation' => [
                 'horizontal' => 'flex-row space-x-2',
