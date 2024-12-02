@@ -3,7 +3,7 @@
     init() {
         // Initialize with first tab
         this.$nextTick(() => {
-            const firstTab = this.$refs.tabs.querySelector(&#34;[role='tab']&#34;)
+            const firstTab = this.$refs.tabs.querySelector('[role="tab"]')
             this.selectedTab = firstTab?.id
         })
     },
@@ -15,14 +15,14 @@
     }
 }" {{ $attributes->merge(['class' => $classes()]) }}>
     {{-- Tab List --}}
-    <div x-ref="tabs" role="tablist" class="flex {{ $orientation === 'vertical' ? 'flex-col' : '' }} gap-2">
+    <div x-ref="tabs" role="tablist" class="flex {{ $listClasses() }}">
         {{ $tabs }}
     </div>
 
     {{-- Tab Panels --}}
-    <div class="mt-4">
+    <div class="{{ $panelWrapperClasses() }}">
         {{ $panels }}
     </div>
 </div>
 
-@aware(['orientation'])
+@aware(['orientation', 'style'])

@@ -47,9 +47,8 @@ class Tabs extends BaseComponent
         $this->orientation = $orientation;
 
         $this->defaultClasses = [
-            $this->getDefaultClasses('tabs'),
-            $this->getDefaultClasses('tabs', $style),
-            $this->getDefaultClasses('tabs', 'orientation.'.$orientation),
+            $this->getDefaultClasses('tabs', 'base'),
+            $this->style === 'underline' ? $this->getDefaultClasses('tabs', 'underline.base') : '',
         ];
     }
 
@@ -74,22 +73,22 @@ class Tabs extends BaseComponent
     }
 
     /**
-     * Get the tab button classes.
+     * Get the list wrapper classes.
      *
      * @return string
      */
-    public function tabClasses(): string
+    public function listClasses(): string
     {
-        return $this->getDefaultClasses('tabs', 'tab');
+        return $this->getDefaultClasses('tabs', 'orientation.'.$this->orientation);
     }
 
     /**
-     * Get the active tab classes.
+     * Get the panel wrapper classes.
      *
      * @return string
      */
-    public function activeTabClasses(): string
+    public function panelWrapperClasses(): string
     {
-        return $this->getDefaultClasses('tabs', 'tab.active');
+        return $this->getDefaultClasses('tabs', 'panel.'.$this->orientation);
     }
 } 

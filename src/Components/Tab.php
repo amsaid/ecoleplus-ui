@@ -36,7 +36,10 @@ class Tab extends BaseComponent
      */
     public function tabClasses(): string
     {
-        return $this->getDefaultClasses('tabs', 'tab');
+        return $this->mergeClasses([
+            $this->getDefaultClasses('tabs', 'tab'),
+            $this->getDefaultClasses('tabs', $this->style.'.tab'),
+        ]);
     }
 
     /**
@@ -46,6 +49,9 @@ class Tab extends BaseComponent
      */
     public function activeTabClasses(): string
     {
-        return $this->getDefaultClasses('tabs', 'tab.active');
+        return $this->mergeClasses([
+            $this->getDefaultClasses('tabs', 'tab.active'),
+            $this->getDefaultClasses('tabs', $this->style.'.tab.active'),
+        ]);
     }
 } 
