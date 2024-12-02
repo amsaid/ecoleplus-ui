@@ -1,47 +1,18 @@
-@props([
-    'type' => 'text',
-    'label' => null,
-    'error' => null,
-    'prefix' => null,
-    'suffix' => null,
-])
-
-@php
-    $baseClasses = config('ecoleplus-ui.defaults.input.base', '');
-    $hasError = !empty($error);
-    $inputClasses = $hasError 
-        ? "$baseClasses border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500" 
-        : $baseClasses;
-@endphp
-
-<div>
+div>
     @if($label)
-        <label class="{{ $labelClasses() }}">
+        <label class="block text-sm font-medium text-gray-700 mb-1">
             {{ $label }}
         </label>
     @endif
 
-    <div class="{{ $containerClasses() }}">
-        @if($prefix)
-            <div class="{{ $leftAddonClasses() }}">
-                <span class="text-gray-500 sm:text-sm">{{ $prefix }}</span>
-            </div>
-        @endif
-
-        <input 
+    <div class="relative">
+        <input
             type="{{ $type }}"
-            {{ $attributes->merge(['class' => $inputClasses]) }}
-            @class([
-                'pl-7' => $prefix,
-                'pr-7' => $suffix,
-            ])
+            {{ $attributes->merge([
+                'class' => $mergeClasses($classes),
+                'disabled' => $disabled
+            ]) }}
         >
-
-        @if($suffix)
-            <div class="{{ $rightAddonClasses() }}">
-                <span class="text-gray-500 sm:text-sm">{{ $suffix }}</span>
-            </div>
-        @endif
     </div>
 
     @if($error)

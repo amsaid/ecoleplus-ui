@@ -2,33 +2,36 @@
 
 namespace Ecoleplus\EcoleplusUi\Components;
 
-class Input extends BaseComponent
+class Select extends BaseComponent
 {
-    public string $type;
     public ?string $label;
     public ?string $error;
     public bool $disabled;
+    public $options;
+    public $selected;
 
     public function __construct(
-        string $type = 'text',
+        $options = [],
+        $selected = null,
         ?string $label = null,
         ?string $error = null,
         bool $disabled = false
     ) {
-        $this->type = $type;
+        $this->options = $options;
+        $this->selected = $selected;
         $this->label = $label;
         $this->error = $error;
         $this->disabled = $disabled;
 
         $this->defaultClasses = [
-            $this->getDefaultClasses('input', 'base'),
-            $this->error ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500' : '',
+            $this->getDefaultClasses('select', 'base'),
+            $this->error ? 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500' : '',
             $this->disabled ? 'bg-gray-100 cursor-not-allowed' : '',
         ];
     }
 
     public function render()
     {
-        return view('ecoleplus-ui::components.input');
+        return view('ecoleplus-ui::components.select');
     }
 }
