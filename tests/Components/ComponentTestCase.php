@@ -24,7 +24,7 @@ trait ComponentTestCase
 
     protected function assertComponentRenders(string $expected, string $template, array $data = []): void
     {
-        $blade = trim((string) $this->blade($template, $data));
+        $blade = trim(preg_replace('/\s\s+/', ' ', (string) $this->blade($template, $data)));
         $html = trim($expected);
 
         $this->assertStringContainsString($html, $blade);

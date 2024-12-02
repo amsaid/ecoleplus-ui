@@ -18,7 +18,10 @@ use Ecoleplus\EcoleplusUi\Components\{
     Popover,
     Card,
     Dropdown,
-    Modal
+    Modal,
+    Alert,
+    Badge,
+    Avatar
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -50,7 +53,10 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Popover::class,
                 Card::class,
                 Dropdown::class,
-                Modal::class
+                Modal::class,
+                Alert::class,
+                Badge::class,
+                Avatar::class
             )
             ->hasAssets()
             //->hasCommand(EcoleplusUiCommand::class)
