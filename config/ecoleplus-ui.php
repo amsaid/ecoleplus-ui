@@ -91,6 +91,16 @@ return [
                 'default' => 'border-b border-gray-200 dark:border-gray-700',
             ],
         ],
+        'spinner' => [
+            'base' => 'animate-spin rounded-full border-2 border-primary-200 border-t-primary-600',
+            'size' => [
+                'xs' => 'h-3 w-3',
+                'sm' => 'h-4 w-4',
+                'md' => 'h-6 w-6',
+                'lg' => 'h-8 w-8',
+                'xl' => 'h-10 w-10',
+            ],
+        ],
     ],
 
     /*
