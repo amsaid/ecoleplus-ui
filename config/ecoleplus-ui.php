@@ -80,7 +80,16 @@ return [
         ],
         'card-section' => [
             'base' => 'divide-y divide-gray-200 dark:divide-gray-700',
-            'bordered' => 'border-t border-gray-200 dark:border-gray-700',
+            'type' => [
+                'header' => 'rounded-t-lg bg-gray-50 dark:bg-gray-800',
+                'footer' => 'rounded-b-lg bg-gray-50 dark:bg-gray-800',
+                'default' => '',
+            ],
+            'bordered-type' => [
+                'header' => 'border-b border-gray-200 dark:border-gray-700',
+                'footer' => 'border-t border-gray-200 dark:border-gray-700',
+                'default' => 'border-b border-gray-200 dark:border-gray-700',
+            ],
         ],
     ],
 
