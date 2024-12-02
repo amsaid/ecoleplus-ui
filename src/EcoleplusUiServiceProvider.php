@@ -42,7 +42,8 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasViewComponents($this->prefix)
             ->hasAssets()
-            ->hasCommand(EcoleplusUiCommand::class);
+            //->hasCommand(EcoleplusUiCommand::class)
+            ;
     }
 
     public function packageBooted()
@@ -53,7 +54,7 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
         }
 
         // Register anonymous blade components with prefix
-        Blade::anonymousComponentPath(__DIR__.'/../resources/views/components', $this->prefix);
+        //Blade::anonymousComponentPath(__DIR__.'/../resources/views/components', $this->prefix);
     }
 
     public function packageRegistered()
