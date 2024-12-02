@@ -2,6 +2,8 @@
 
 namespace Ecoleplus\EcoleplusUi\Components;
 
+use Illuminate\View\Component;
+
 class Input extends BaseComponent
 {
     /**
@@ -35,6 +37,26 @@ class Input extends BaseComponent
     public int $rows;
 
     /**
+     * Whether to allow multiple file uploads.
+     */
+    public bool $multiple;
+
+    /**
+     * Whether to enable drag and drop for file inputs.
+     */
+    public bool $dragAndDrop;
+
+    /**
+     * Whether to enable auto-resize for textareas.
+     */
+    public bool $autoResize;
+
+    /**
+     * The maximum character count for textareas.
+     */
+    public ?int $maxChars;
+
+    /**
      * Create a new component instance.
      */
     public function __construct(
@@ -43,7 +65,11 @@ class Input extends BaseComponent
         ?string $placeholder = null,
         ?string $prefix = null,
         ?string $suffix = null,
-        int $rows = 3
+        int $rows = 3,
+        bool $multiple = false,
+        bool $dragAndDrop = false,
+        bool $autoResize = false,
+        ?int $maxChars = null
     ) {
         $this->type = $type;
         $this->value = $value;
@@ -51,6 +77,10 @@ class Input extends BaseComponent
         $this->prefix = $prefix;
         $this->suffix = $suffix;
         $this->rows = $rows;
+        $this->multiple = $multiple;
+        $this->dragAndDrop = $dragAndDrop;
+        $this->autoResize = $autoResize;
+        $this->maxChars = $maxChars;
     }
 
     /**
@@ -75,13 +105,21 @@ class Input extends BaseComponent
     public function classes(): string
     {
         $baseClasses = $this->getDefaultClasses('input', 'base');
-
+        
         if ($this->type === 'file') {
-            return $this->getDefaultClasses('input', 'file');
+            $classes = $this->getDefaultClasses('input', 'file');
+            if ($this->dragAndDrop) {
+                $classes .= ' ' . $this->getDefaultClasses('input', 'file-drag');
+            }
+            return $classes;
         }
 
         if ($this->type === 'textarea') {
-            return $this->getDefaultClasses('input', 'textarea');
+            $classes = $this->getDefaultClasses('input', 'textarea');
+            if ($this->autoResize) {
+                $classes .= ' ' . $this->getDefaultClasses('input', 'textarea-auto');
+            }
+            return $classes;
         }
 
         return $baseClasses;
@@ -101,5 +139,21 @@ class Input extends BaseComponent
     public function suffixClasses(): string
     {
         return $this->getDefaultClasses('input', 'suffix');
+    }
+
+    /**
+     * Get the drag and drop zone classes.
+     */
+    public function dragZoneClasses(): string
+    {
+        return $this->getDefaultClasses('input', 'drag-zone');
+    }
+
+    /**
+     * Get the character count classes.
+     */
+    public function charCountClasses(): string
+    {
+        return $this->getDefaultClasses('input', 'char-count');
     }
 }
