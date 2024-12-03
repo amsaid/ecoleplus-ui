@@ -1,0 +1,48 @@
+{
+    "name": "amsaid/ecoleplus-ui",
+    "description": "A Laravel 11 UI library supporting TALL stack components",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "EcolePlus\\EcolePlusUi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EcolePlus\\EcolePlusUi\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0",
+        "livewire/livewire": "^3.0",
+        "blade-ui-kit/blade-icons": "^1.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^9.0",
+        "pestphp/pest": "^2.0",
+        "laravel/pint": "^1.13"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EcolePlus\\EcolePlusUi\\EcolePlusUiServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    }
+}

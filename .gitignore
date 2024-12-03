@@ -1,0 +1,15 @@
+/vendor
+/node_modules
+.phpunit.result.cache
+.phpunit.cache
+composer.lock
+package-lock.json
+.php-cs-fixer.cache
+.env
+.env.backup
+.env.production
+.phpstorm.meta.php
+_ide_helper.php
+build
+coverage
+.DS_Store 
