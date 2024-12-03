@@ -4,7 +4,8 @@
     'label' => null,
     'hint' => null,
     'error' => null,
-    'rows' => 3,
+    'placeholder' => null,
+    'options' => [],
 ])
 
 @php
@@ -19,15 +20,24 @@
         </label>
     @endif
 
-    <textarea
+    <select
         {{ $attributes->merge([
             'id' => $id,
             'name' => $name,
-            'rows' => $rows,
             'class' => 'block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm' .
-                ($hasError ? ' border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500' : '')
+                ($hasError ? ' border-red-300 text-red-900 focus:border-red-500 focus:ring-red-500' : '')
         ]) }}
-    >{{ $slot }}</textarea>
+    >
+        @if($placeholder)
+            <option value="">{{ $placeholder }}</option>
+        @endif
+
+        @foreach($options as $value => $label)
+            <option value="{{ $value }}">{{ $label }}</option>
+        @endforeach
+
+        {{ $slot }}
+    </select>
 
     @if($hint && !$hasError)
         <p class="mt-2 text-sm text-gray-500">{{ $hint }}</p>
