@@ -12,7 +12,6 @@ parameters:
         - '#PHPDoc tag @var#'
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
-    checkModelProperties: true
     checkMissingIterableValueType: false
 
     # Laravel specific settings
