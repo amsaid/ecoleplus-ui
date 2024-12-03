@@ -24,7 +24,7 @@ uses(EcolePlus\EcolePlusUi\Tests\TestCase::class)->in('Components');
 |
 */
 
-expect()->extend('toBeOne', function () {
+expect()->extend('toBeOne', function (): bool {
     return $this->toBe(1);
 });
 

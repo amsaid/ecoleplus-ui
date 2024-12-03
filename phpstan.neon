@@ -9,7 +9,14 @@ parameters:
     excludePaths:
         - vendor/*
     ignoreErrors:
-        - '#PHPDoc tag @var#'
+        -
+            message: '#Call to an undefined method .+::with\(\)#'
+            path: tests/*
+        -
+            message: '#Undefined variable: \$this#'
+            path: tests/Pest.php
+        -
+            message: '#Function .+ has no return type specified#'
+            path: tests/Pest.php
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
-    checkMissingIterableValueType: false

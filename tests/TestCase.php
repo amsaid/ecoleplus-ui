@@ -2,10 +2,10 @@
 
 namespace EcolePlus\EcolePlusUi\Tests;
 
-use EcolePlus\EcolePlusUi\EcolePlusUiServiceProvider;
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
-use Illuminate\Support\Facades\View;
+use EcolePlus\EcolePlusUi\EcolePlusUiServiceProvider;
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -15,15 +15,10 @@ class TestCase extends Orchestra
         parent::setUp();
 
         // Load package views
-        View::addNamespace('ecoleplus-ui', __DIR__.'/../resources/views');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ecoleplus-ui');
 
         // Load package config
-        $this->app->make('config')->set('ecoleplus-ui', require __DIR__.'/../config/ecoleplus-ui.php');
-
-        // Register components
-        $this->app->make('blade.compiler')->component('eplus-alert', \EcolePlus\EcolePlusUi\Components\Alert::class);
-        $this->app->make('blade.compiler')->component('eplus-button', \EcolePlus\EcolePlusUi\Components\Button::class);
-        $this->app->make('blade.compiler')->component('eplus-input', \EcolePlus\EcolePlusUi\Components\Input::class);
+        $this->mergeConfigFrom(__DIR__.'/../config/ecoleplus-ui.php', 'ecoleplus-ui');
     }
 
     protected function getPackageProviders($app): array
@@ -39,5 +34,19 @@ class TestCase extends Orchestra
     {
         // Set up any environment configuration
         $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+    }
+
+    protected function loadViewsFrom(string $path, string $namespace): void
+    {
+        /** @var Application $app */
+        $app = $this->app;
+        $app['view']->addNamespace($namespace, $path);
+    }
+
+    protected function mergeConfigFrom(string $path, string $key): void
+    {
+        /** @var Application $app */
+        $app = $this->app;
+        $app['config']->set($key, require $path);
     }
 } 
