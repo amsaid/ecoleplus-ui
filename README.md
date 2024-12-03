@@ -12,6 +12,8 @@ A modern UI component library for Laravel 11 applications, built with the TALL s
 - ♿ Accessible components
 - 🎯 Type-safe components
 - 🔄 Easy to customize
+- 🎭 Interactive components with Alpine.js
+- 🔍 Comprehensive test coverage
 
 ## Requirements
 
@@ -28,7 +30,7 @@ You can install the package via composer:
 composer require amsaid/ecoleplus-ui
 ```
 
-After installing the package, you can publish the configuration:
+After installing the package, you can publish the configuration and assets:
 
 ```bash
 php artisan vendor:publish --provider="EcolePlus\EcolePlusUi\EcolePlusUiServiceProvider"
@@ -72,38 +74,75 @@ module.exports = {
 }
 ```
 
+2. Add Alpine.js to your application:
+
+```html
+<!-- In your layout file -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+```
+
 ## Available Components
 
-### Button
+### Form Components
 
+#### Button
 ```blade
 <x-eplus::button type="button" variant="primary">
     Click me
 </x-eplus::button>
+
+<!-- With icons -->
+<x-eplus::button iconLeft="heroicon-m-plus">
+    Add Item
+</x-eplus::button>
 ```
 
-### Input
-
+#### Input
 ```blade
 <x-eplus::input 
     name="email"
     label="Email Address"
     type="email"
+    icon="heroicon-m-envelope"
+    hint="We'll never share your email"
 />
 ```
 
-### Card
-
+#### Textarea
 ```blade
-<x-eplus::card>
+<x-eplus::textarea 
+    name="description"
+    label="Description"
+    rows="4"
+    hint="Maximum 500 characters"
+/>
+```
+
+#### Select
+```blade
+<x-eplus::select 
+    name="country"
+    label="Select Country"
+    :options="[
+        'us' => 'United States',
+        'uk' => 'United Kingdom'
+    ]"
+    placeholder="Choose a country"
+/>
+```
+
+### Layout Components
+
+#### Card
+```blade
+<x-eplus::card shadow>
     <x-slot:header>Card Title</x-slot:header>
     Card content goes here
     <x-slot:footer>Card Footer</x-slot:footer>
 </x-eplus::card>
 ```
 
-### Card Section
-
+#### Card Section
 ```blade
 <x-eplus::card>
     <x-eplus::card-section 
@@ -115,44 +154,95 @@ module.exports = {
 </x-eplus::card>
 ```
 
-### Alert
+### Interactive Components
 
+#### Dropdown
+```blade
+<x-eplus::dropdown align="right" width="48">
+    <x-slot:trigger>
+        <x-eplus::button>
+            Options
+        </x-eplus::button>
+    </x-slot:trigger>
+    
+    <x-slot:content>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            Profile
+        </a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            Settings
+        </a>
+    </x-slot:content>
+</x-eplus::dropdown>
+```
+
+#### Modal
+```blade
+<div x-data="{ open: false }">
+    <x-eplus::button @click="open = true">
+        Open Modal
+    </x-eplus::button>
+
+    <x-eplus::modal name="example" :show="false" x-model="open">
+        <x-slot:title>
+            Modal Title
+        </x-slot:title>
+
+        Modal content goes here...
+
+        <x-slot:footer>
+            <x-eplus::button @click="open = false">
+                Close
+            </x-eplus::button>
+        </x-slot:footer>
+    </x-eplus::modal>
+</div>
+```
+
+### Feedback Components
+
+#### Alert
 ```blade
 <x-eplus::alert type="success" title="Success!" dismissible>
     Operation completed successfully.
 </x-eplus::alert>
 ```
 
-### Badge
-
+#### Badge
 ```blade
 <x-eplus::badge variant="primary" size="md">
     New
 </x-eplus::badge>
 ```
 
-### Textarea
-
+#### Progress
 ```blade
-<x-eplus::textarea 
-    name="description"
-    label="Description"
-    rows="4"
-    hint="Maximum 500 characters"
+<x-eplus::progress 
+    :value="75" 
+    label="Uploading..." 
+    variant="primary"
+    :showValue="true"
+    :animated="true"
 />
 ```
 
-### Select
+### Display Components
 
+#### Avatar
 ```blade
-<x-eplus::select 
-    name="country"
-    label="Select Country"
-    :options="[
-        'us' => 'United States',
-        'uk' => 'United Kingdom'
-    ]"
-    placeholder="Choose a country"
+<!-- With image -->
+<x-eplus::avatar 
+    src="https://example.com/avatar.jpg"
+    alt="John Doe"
+    size="lg"
+    status="online"
+/>
+
+<!-- With initials fallback -->
+<x-eplus::avatar 
+    alt="John Doe"
+    size="lg"
+    status="online"
 />
 ```
 
@@ -169,14 +259,16 @@ module.exports = {
 }
 ```
 
-2. Toggle dark mode by adding/removing the `dark` class to your HTML element:
+2. Toggle dark mode using Alpine.js:
 
-```js
-// Using Alpine.js
-<html x-data="{ dark: false }" :class="{ 'dark': dark }">
-
-// Or using plain JavaScript
-document.documentElement.classList.toggle('dark')
+```html
+<html x-data="{ dark: localStorage.getItem('dark') === 'true' }" 
+      x-init="$watch('dark', val => localStorage.setItem('dark', val))"
+      :class="{ 'dark': dark }">
+    <button @click="dark = !dark">
+        Toggle Dark Mode
+    </button>
+</html>
 ```
 
 Components will automatically adjust their styling in dark mode, providing:
@@ -184,6 +276,7 @@ Components will automatically adjust their styling in dark mode, providing:
 - Readable text colors
 - Softer background colors
 - Consistent visual hierarchy
+- Reduced eye strain in dark environments
 
 ## Documentation
 
@@ -193,9 +286,27 @@ For detailed documentation, please refer to the [docs](docs) directory:
 - [Customization Guide](docs/customization.md)
 - [Components Documentation](docs/components)
 
+## Testing
+
+The package includes a comprehensive test suite. To run the tests:
+
+```bash
+composer test
+```
+
+For code coverage report:
+
+```bash
+composer test-coverage
+```
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. Make sure to:
+
+1. Add tests for new features
+2. Follow the existing code style
+3. Update documentation as needed
 
 ## License
 
@@ -203,7 +314,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## Credits
 
-- [Said AMRANI](https://github.com/amsaid)
+- [Said](https://github.com/amsaid)
 - [All Contributors](../../contributors)
 
 ## Security
