@@ -5,90 +5,43 @@ namespace Ecoleplus\EcoleplusUi\Components;
 class Tabs extends BaseComponent
 {
     /**
-     * The currently selected tab name
-     *
-     * @var string|null
-     */
-    public $selected;
-
-    /**
-     * The visual style of the tabs (underline|pills)
-     *
-     * @var string
-     */
-    public $style;
-
-    /**
-     * The orientation of the tabs (horizontal|vertical)
-     *
-     * @var string
-     */
-    public $orientation;
-
-    /**
-     * Whether to sync the selected tab with the URL hash
-     *
-     * @var bool
-     */
-    public $urlHash;
-
-    /**
-     * Whether to lazy load tab content
-     *
-     * @var bool
-     */
-    public $lazy;
-
-    /**
-     * Initialize the component
-     *
-     * @param string|null $selected Initial selected tab
-     * @param string $style Visual style of tabs
-     * @param string $orientation Tab orientation
-     * @param bool $urlHash Whether to sync with URL hash
-     * @param bool $lazy Whether to lazy load content
+     * Create a new component instance.
      */
     public function __construct(
-        string $selected = null,
-        string $style = 'underline',
-        string $orientation = 'horizontal',
-        bool $urlHash = false,
-        bool $lazy = false
+        public string $selected = '',
+        public string $style = 'underline',
+        public string $orientation = 'horizontal',
+        public bool $urlHash = false,
+        public bool $lazy = false
     ) {
-        $this->selected = $selected;
-        $this->style = $style;
-        $this->orientation = $orientation;
-        $this->urlHash = $urlHash;
-        $this->lazy = $lazy;
     }
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
      */
-    public function render()
+    public function render(): \Illuminate\View\View
     {
-        $baseClasses = $this->getDefaultClasses('tabs', 'base');
-        $styleClasses = $this->getDefaultClasses('tabs.styles.' . $this->style, 'base');
-        $orientationClasses = $this->getDefaultClasses('tabs.orientation', $this->orientation);
-
         return view('ecoleplus-ui::components.tabs', [
-            'baseClasses' => $this->mergeClasses([
-                $baseClasses,
-                $styleClasses,
-                $orientationClasses,
-            ]),
+            'baseClasses' => $this->getBaseClasses(),
         ]);
     }
 
     /**
-     * Get the classes for a tab button
-     *
-     * @param bool $isActive Whether the tab is active
-     * @return string
+     * Get the base classes for the tabs container
      */
-    public function getTabClasses($isActive = false): string
+    protected function getBaseClasses(): string
+    {
+        return $this->mergeClasses([
+            $this->getDefaultClasses('tabs', 'base'),
+            $this->getDefaultClasses('tabs.styles.' . $this->style, 'base'),
+            $this->getDefaultClasses('tabs.orientation', $this->orientation),
+        ]);
+    }
+
+    /**
+     * Get classes for a tab button
+     */
+    public function getTabClasses(bool $isActive = false): string
     {
         $classes = [
             $this->getDefaultClasses('tabs', 'tab'),
@@ -101,5 +54,16 @@ class Tabs extends BaseComponent
         }
 
         return $this->mergeClasses($classes);
+    }
+
+    /**
+     * Get classes for tab panels container
+     */
+    protected function getPanelClasses(): string
+    {
+        return $this->mergeClasses([
+            $this->getDefaultClasses('tabs.panel', 'base'),
+            $this->getDefaultClasses('tabs.panel', $this->orientation),
+        ]);
     }
 }

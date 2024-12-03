@@ -4,7 +4,6 @@ namespace Ecoleplus\EcoleplusUi\Components;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
 abstract class BaseComponent extends Component
 {
@@ -95,7 +94,7 @@ abstract class BaseComponent extends Component
      */
     protected function hasClass(string $class): bool
     {
-        return Str::contains($this->classes, $class);
+        return Str::contains(implode(' ', $this->classes), $class);
     }
 
     /**
@@ -126,28 +125,5 @@ abstract class BaseComponent extends Component
         $this->classes = array_diff($this->classes, $remove);
 
         return $this;
-    }
-
-    /**
-     * Get an attribute's value from the component.
-     *
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    protected function getAttribute(string $key, $default = null)
-    {
-        return Arr::get($this->attributes->getAttributes(), $key, $default);
-    }
-
-    /**
-     * Determine if the component has the given attribute.
-     *
-     * @param string $key
-     * @return bool
-     */
-    protected function hasAttribute(string $key): bool
-    {
-        return $this->attributes->has($key);
     }
 }

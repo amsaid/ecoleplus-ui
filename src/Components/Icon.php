@@ -8,59 +8,20 @@ use Illuminate\Support\HtmlString;
 class Icon extends BaseComponent
 {
     /**
-     * The name of the icon
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The style of the icon (solid|outline)
-     *
-     * @var string
-     */
-    public $style;
-
-    /**
-     * The size of the icon
-     *
-     * @var string
-     */
-    public $size;
-
-    /**
-     * Custom SVG string or path
-     *
-     * @var string|null
-     */
-    public $svg;
-
-    /**
-     * Initialize the component
-     *
-     * @param string $name The icon name
-     * @param string $style The icon style (solid|outline)
-     * @param string $size The icon size (xs|sm|md|lg|xl)
-     * @param string|null $svg Custom SVG content or path
+     * Create a new component instance.
      */
     public function __construct(
-        string $name,
-        string $style = 'solid',
-        string $size = 'md',
-        ?string $svg = null
+        public string $name,
+        public string $style = 'solid',
+        public string $size = 'md',
+        public ?string $svg = null
     ) {
-        $this->name = $name;
-        $this->style = $style;
-        $this->size = $size;
-        $this->svg = $svg;
     }
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
      */
-    public function render()
+    public function render(): \Illuminate\View\View
     {
         return view('ecoleplus-ui::components.icon', [
             'iconName' => $this->getIconName(),
@@ -71,8 +32,6 @@ class Icon extends BaseComponent
 
     /**
      * Get the formatted icon name for Blade Icons
-     *
-     * @return string|null
      */
     protected function getIconName(): ?string
     {
@@ -93,8 +52,6 @@ class Icon extends BaseComponent
 
     /**
      * Get custom SVG content
-     *
-     * @return \Illuminate\Support\HtmlString|null
      */
     protected function getSvgContent(): ?HtmlString
     {
@@ -117,9 +74,6 @@ class Icon extends BaseComponent
 
     /**
      * Clean and prepare SVG content
-     *
-     * @param string $svg
-     * @return string
      */
     protected function prepareSvg(string $svg): string
     {
@@ -147,8 +101,6 @@ class Icon extends BaseComponent
 
     /**
      * Get the classes for the icon
-     *
-     * @return string
      */
     protected function getIconClasses(): string
     {
