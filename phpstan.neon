@@ -18,5 +18,17 @@ parameters:
         -
             message: '#Function .+ has no return type specified#'
             path: tests/Pest.php
+        -
+            message: '#Access to an undefined property Pest\\Mixins\\Expectation<mixed>::\$not#'
+            path: tests/*
+        -
+            message: '#Access to property \$not on an unknown class Pest\\Support\\Extendable#'
+            path: tests/*
+        -
+            message: '#PHPDoc tag @var for variable \$expect contains unknown class Pest\\Support\\Extendable#'
+            path: tests/*
+        -
+            message: '#PHPDoc tag @var for variable \$expect contains generic class Pest\\Expectation but does not specify its types: TValue#'
+            path: tests/*
     tmpDir: build/phpstan
     checkOctaneCompatibility: true

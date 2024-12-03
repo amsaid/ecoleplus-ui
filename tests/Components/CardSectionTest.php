@@ -38,8 +38,9 @@ test('card section component can have description', function () {
 test('card section component can disable divider', function () {
     $view = Blade::render('<x-eplus::card-section :noDivider="true">Content</x-eplus::card-section>');
 
-    expect($view)
-        ->not->toContain('border-b')
+    /** @var \Pest\Expectation|\Pest\Support\Extendable $expect */
+    $expect = expect($view);
+    $expect->not->toContain('border-b')
         ->not->toContain('border-gray-200');
 });
 

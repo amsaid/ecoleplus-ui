@@ -44,16 +44,18 @@ test('card component can have footer', function () {
 test('card component can disable padding', function () {
     $view = Blade::render('<x-eplus::card :padding="false">Content</x-eplus::card>');
 
-    expect($view)
-        ->not->toContain('p-4')
+    /** @var \Pest\Expectation|\Pest\Support\Extendable $expect */
+    $expect = expect($view);
+    $expect->not->toContain('p-4')
         ->not->toContain('sm:p-6');
 });
 
 test('card component can disable shadow', function () {
     $view = Blade::render('<x-eplus::card :shadow="false">Content</x-eplus::card>');
 
-    expect($view)
-        ->not->toContain('shadow-sm');
+    /** @var \Pest\Expectation|\Pest\Support\Extendable $expect */
+    $expect = expect($view);
+    $expect->not->toContain('shadow-sm');
 });
 
 test('card component merges attributes', function () {
