@@ -160,44 +160,83 @@ module.exports = {
 ```blade
 <x-eplus::dropdown align="right" width="48">
     <x-slot:trigger>
-        <x-eplus::button>
+        <button x-ref="trigger" type="button" class="flex items-center gap-2">
             Options
-        </x-eplus::button>
+            <x-heroicon-m-chevron-down class="h-5 w-5" />
+        </button>
     </x-slot:trigger>
     
     <x-slot:content>
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-            Profile
-        </a>
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-            Settings
-        </a>
+        <div class="py-1">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                Profile
+            </a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                Settings
+            </a>
+            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+            <button class="block w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-600">
+                Sign out
+            </button>
+        </div>
     </x-slot:content>
 </x-eplus::dropdown>
 ```
 
+The dropdown component uses Alpine.js's `x-anchor` directive for perfect positioning. Features include:
+- Automatic positioning relative to trigger
+- Smart overflow handling
+- Keyboard navigation support (Escape to close)
+- Dark mode support
+- Smooth animations
+- Click outside to close
+
 #### Modal
 ```blade
-<div x-data="{ open: false }">
-    <x-eplus::button @click="open = true">
-        Open Modal
-    </x-eplus::button>
+<!-- Trigger button -->
+<x-eplus::button @click="$dispatch('open-modal', 'confirm-delete')">
+    Delete Item
+</x-eplus::button>
 
-    <x-eplus::modal name="example" :show="false" x-model="open">
-        <x-slot:title>
-            Modal Title
-        </x-slot:title>
+<!-- Modal component -->
+<x-eplus::modal name="confirm-delete" x-show="false" x-on:open-modal.window="
+    if ($event.detail === 'confirm-delete') {
+        show = true;
+    }
+">
+    <x-slot:title>
+        Confirm Deletion
+    </x-slot:title>
 
-        Modal content goes here...
+    <p class="text-gray-600 dark:text-gray-300">
+        Are you sure you want to delete this item? This action cannot be undone.
+    </p>
 
-        <x-slot:footer>
-            <x-eplus::button @click="open = false">
-                Close
+    <x-slot:footer>
+        <div class="flex justify-end gap-3">
+            <x-eplus::button variant="secondary" @click="show = false">
+                Cancel
             </x-eplus::button>
-        </x-slot:footer>
-    </x-eplus::modal>
-</div>
+            <x-eplus::button variant="danger" @click="
+                // Handle deletion
+                show = false;
+            ">
+                Delete
+            </x-eplus::button>
+        </div>
+    </x-slot:footer>
+</x-eplus::modal>
 ```
+
+The modal component uses Alpine.js's `x-teleport` to render at the document root, providing:
+- Proper stacking context and z-index handling
+- Event-based opening/closing
+- Keyboard support (Escape to close)
+- Click outside to close
+- Focus trapping (coming soon)
+- Dark mode support
+- Customizable max width
+- Smooth animations
 
 ### Feedback Components
 

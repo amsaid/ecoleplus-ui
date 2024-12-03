@@ -14,7 +14,8 @@ test('modal component can be rendered', function () {
 
     expect($view)
         ->toContain('Modal Content')
-        ->toContain('x-data="{ show: false }"');
+        ->toContain('x-data="{ show: false }"')
+        ->toContain('x-teleport="body"');
 });
 
 test('modal component shows title when provided', function () {
@@ -58,4 +59,31 @@ test('modal component shows footer when provided', function () {
     expect($view)
         ->toContain('Close')
         ->toContain('bg-gray-100');
+});
+
+test('modal component supports dark mode', function () {
+    $view = Blade::render('
+        <x-eplus::modal name="test-modal" title="Test Title">
+            <p>Modal Content</p>
+            <x-slot:footer>
+                <button>Close</button>
+            </x-slot:footer>
+        </x-eplus::modal>
+    ');
+
+    expect($view)
+        ->toContain('dark:bg-gray-800')
+        ->toContain('dark:border-gray-700')
+        ->toContain('dark:text-gray-100');
+});
+
+test('modal component prevents click propagation', function () {
+    $view = Blade::render('
+        <x-eplus::modal name="test-modal">
+            <p>Modal Content</p>
+        </x-eplus::modal>
+    ');
+
+    expect($view)
+        ->toContain('@click.stop');
 }); 
