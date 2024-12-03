@@ -14,7 +14,7 @@ test('modal component can be rendered', function () {
 
     expect($view)
         ->toContain('Modal Content')
-        ->toContain('x-data="{ show: false }"')
+        ->toContain('x-modelable="show"')
         ->toContain('x-teleport="body"');
 });
 
