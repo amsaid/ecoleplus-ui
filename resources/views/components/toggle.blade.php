@@ -38,16 +38,16 @@
     $currentSize = $sizes[$size] ?? $sizes['md'];
 @endphp
 
-<div x-data="{ checked: @js($checked) }" x-modelable="checked">
+<div x-data="{ checked: {{ $checked ? 'true' : 'false' }} }">
     <input
         type="checkbox"
-        {{ $attributes->merge([
+        {{ $attributes->except(['class', 'wire:model'])->merge([
             'name' => $name,
             'id' => $id,
             'value' => $value,
             'disabled' => $disabled,
             'class' => 'sr-only',
-        ])->whereDoesntStartWith('wire:model') }}
+        ]) }}
         :checked="checked"
         @change="checked = $event.target.checked"
         x-ref="input"
@@ -58,7 +58,7 @@
             type="button"
             role="switch"
             :aria-checked="checked"
-            @click="if (!@js($disabled)) { checked = !checked; $refs.input.click() }"
+            @click="if (!@js($disabled)) { checked = !checked }"
             :class="[
                 'relative inline-flex shrink-0 {{ $currentSize['switch'] }} rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800',
                 @js($disabled) ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',

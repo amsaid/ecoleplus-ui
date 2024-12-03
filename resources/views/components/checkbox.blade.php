@@ -28,8 +28,8 @@
                 'id' => $id,
                 'value' => $value,
                 'disabled' => $disabled,
-            ])->whereDoesntStartWith('wire:model') }}
-            @checked($checked)
+            ]) }}
+            @if(!$attributes->has('wire:model')) @checked($checked) @endif
         />
     </div>
 

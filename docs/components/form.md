@@ -17,10 +17,69 @@ The components also support Livewire's real-time validation with error states:
 
 ```blade
 <x-eplus::input
-    wire:model="email"
+    wire:model.live="email"
     :error="$errors->first('email')"
 />
 ```
+
+### Checkbox Groups
+
+When using checkboxes in a group with array values:
+
+```blade
+<x-eplus::checkbox
+    name="permissions[]"
+    value="create"
+    wire:model="selectedPermissions"
+    label="Create"
+/>
+<x-eplus::checkbox
+    name="permissions[]"
+    value="edit"
+    wire:model="selectedPermissions"
+    label="Edit"
+/>
+```
+
+### Radio Groups
+
+When using radio buttons in a group:
+
+```blade
+<x-eplus::radio
+    name="color"
+    value="red"
+    wire:model="selectedColor"
+    label="Red"
+/>
+<x-eplus::radio
+    name="color"
+    value="blue"
+    wire:model="selectedColor"
+    label="Blue"
+/>
+```
+
+### Toggle with Livewire
+
+The toggle component supports two-way binding with Livewire:
+
+```blade
+<x-eplus::toggle
+    wire:model.live="notifications"
+    label="Enable notifications"
+    description="Receive email notifications"
+/>
+```
+
+### Available wire:model Modifiers
+
+All components support these Livewire modifiers:
+
+- `wire:model` - Updates on change/input
+- `wire:model.live` - Real-time updates
+- `wire:model.blur` - Updates on blur
+- `wire:model.debounce.Xms` - Debounced updates
 
 ## Checkbox
 
