@@ -13,8 +13,3 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkMissingIterableValueType: false
-
-    # Laravel specific settings
-    noUnnecessaryCollectionCall: true
-    noUnnecessaryCollectionCallOnly: true
-    checkModelProperties: true 
