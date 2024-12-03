@@ -3,9 +3,7 @@
     @click="selected = '{{ $name }}'"
     :class="[
         '{{ $baseClasses }}',
-        selected === '{{ $name }}'
-            ? '{{ $component->getDefaultClasses("tabs.tab.styles.{$component->closest('ecp-tabs')->style}", 'active') }}'
-            : '{{ $component->getDefaultClasses("tabs.tab.styles.{$component->closest('ecp-tabs')->style}", 'inactive') }}'
+        selected === '{{ $name }}' ? '{{ $activeClasses }}' : '{{ $inactiveClasses }}'
     ]"
     role="tab"
     aria-controls="tab-panel-{{ $name }}"

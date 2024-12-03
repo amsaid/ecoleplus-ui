@@ -1,9 +1,13 @@
 <?php
-// Components/Tab.php
+
 namespace Ecoleplus\EcoleplusUi\Components;
+
+use Ecoleplus\EcoleplusUi\Traits\HasContext;
 
 class Tab extends BaseComponent
 {
+    use HasContext;
+
     public function __construct(
         public string $name,
         public bool $selected = false,
@@ -20,13 +24,11 @@ class Tab extends BaseComponent
 
     protected function getPanelClasses(): string
     {
-        $parentTabs = $this->closest('ecp-tabs');
+        $orientation = $this->getContext('orientation', 'horizontal');
 
         return $this->mergeClasses([
             $this->getDefaultClasses('tabs.panel', 'base'),
-            $this->getDefaultClasses('tabs.panel.orientation',
-                $parentTabs->orientation ?? 'horizontal'
-            ),
+            $this->getDefaultClasses('tabs.panel.orientation', $orientation),
             $this->style
                 ? $this->getDefaultClasses('tabs.panel.styles', $this->style)
                 : '',

@@ -15,6 +15,13 @@ class Tabs extends BaseComponent
 
     public function render(): \Illuminate\View\View
     {
+        // Add context for child components
+        request()->merge([
+            '_context' => [
+                'style' => $this->style,
+                'orientation' => $this->orientation,
+            ]
+        ]);
         return view('ecoleplus-ui::components.tabs', [
             'baseClasses' => $this->getBaseClasses(),
             'listClasses' => $this->getListClasses(),
