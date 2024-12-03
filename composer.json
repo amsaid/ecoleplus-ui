@@ -45,7 +45,7 @@
     },
     "scripts": {
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test-coverage": "vendor/bin/pest --coverage-clover clover.xml",
         "format": "vendor/bin/pint"
     }
 }
