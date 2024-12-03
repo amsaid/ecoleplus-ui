@@ -1,41 +1,32 @@
 @props([
     'type' => 'button',
     'variant' => 'primary',
-    'size' => 'md',
-    'disabled' => false,
+    'iconLeft' => null,
+    'iconRight' => null,
 ])
 
 @php
-    $config = config('ecoleplus-ui.components.button');
-    $classes = collect([$config['base'], $config[$variant] ?? ''])
-        ->filter()
-        ->join(' ');
+    $baseClasses = config('ecoleplus-ui.components.button.base');
+    $variantClasses = config('ecoleplus-ui.components.button.variants.' . $variant, '');
 @endphp
 
-<button 
-    {{ $attributes->merge([
-        'type' => $type,
-        'class' => $classes,
-        'disabled' => $disabled,
-    ])->class([
-        'opacity-50 cursor-not-allowed' => $disabled,
-    ]) }}
+<button
+    type="{{ $type }}"
+    {{ $attributes->merge(['class' => $baseClasses . ' ' . $variantClasses]) }}
 >
-    @if($attributes->has('icon-left'))
+    @if($iconLeft)
         <x-dynamic-component 
-            :component="$attributes->get('icon-left')" 
-            :class="config('ecoleplus-ui.icons.class')"
-            class="-ml-1 mr-2"
+            :component="$iconLeft" 
+            class="-ml-1 mr-2 h-5 w-5"
         />
     @endif
 
     {{ $slot }}
 
-    @if($attributes->has('icon-right'))
+    @if($iconRight)
         <x-dynamic-component 
-            :component="$attributes->get('icon-right')" 
-            :class="config('ecoleplus-ui.icons.class')"
-            class="-mr-1 ml-2"
+            :component="$iconRight" 
+            class="-mr-1 ml-2 h-5 w-5"
         />
     @endif
 </button> 

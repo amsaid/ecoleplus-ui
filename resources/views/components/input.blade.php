@@ -1,59 +1,56 @@
 @props([
-    'type' => 'text',
     'name' => null,
     'id' => null,
-    'value' => null,
-    'error' => false,
     'label' => null,
     'hint' => null,
+    'error' => null,
+    'icon' => null,
+    'type' => 'text',
 ])
 
 @php
+    $hasError = $error !== null;
+    $id = $id ?? $name;
+    
     $config = config('ecoleplus-ui.components.input');
-    $classes = collect([$config['base']])
-        ->filter()
-        ->join(' ');
+    $baseClasses = $config['base'];
+    $errorClasses = $config['error'];
+    $labelClasses = $config['label'];
+    $hintClasses = $config['hint'];
 @endphp
 
 <div>
     @if($label)
-        <label 
-            for="{{ $id ?? $name }}" 
-            class="eplus-input-label block text-sm font-medium text-gray-700 mb-1"
-        >
+        <label for="{{ $id }}" class="{{ $labelClasses }}">
             {{ $label }}
         </label>
     @endif
 
     <div class="relative">
-        <input 
+        <input
+            type="{{ $type }}"
             {{ $attributes->merge([
-                'type' => $type,
+                'id' => $id,
                 'name' => $name,
-                'id' => $id ?? $name,
-                'value' => $value,
-            ])->class([
-                $classes,
-                'eplus-input-error' => $error || ($name && isset($errors) && $errors->has($name)),
+                'class' => $baseClasses . ($hasError ? ' ' . $errorClasses : '') . ($icon ? ' pl-10' : '')
             ]) }}
         />
 
-        @if($attributes->has('icon'))
-            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        @if($icon)
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <x-dynamic-component 
-                    :component="$attributes->get('icon')" 
-                    :class="config('ecoleplus-ui.icons.class')"
-                    class="text-gray-400"
+                    :component="$icon" 
+                    class="h-5 w-5 text-gray-400"
                 />
             </div>
         @endif
     </div>
 
-    @if($hint)
-        <p class="mt-1 text-sm text-gray-500">{{ $hint }}</p>
+    @if($hint && !$hasError)
+        <p class="{{ $hintClasses }}">{{ $hint }}</p>
     @endif
 
-    @if($name && isset($errors) && $errors->has($name))
-        <p class="mt-1 text-sm text-red-600">{{ $errors->first($name) }}</p>
+    @if($hasError)
+        <p class="{{ $hintClasses }} text-red-600 dark:text-red-400">{{ $error }}</p>
     @endif
 </div> 

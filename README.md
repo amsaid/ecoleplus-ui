@@ -8,7 +8,7 @@ A modern UI component library for Laravel 11 applications, built with the TALL s
 - 🔧 Built for Laravel 11
 - ⚡ Powered by the TALL stack
 - 📱 Fully responsive components
-- 🌙 Dark mode support
+- 🌙 Dark mode support out of the box
 - ♿ Accessible components
 - 🎯 Type-safe components
 - 🔄 Easy to customize
@@ -28,7 +28,7 @@ You can install the package via composer:
 composer require amsaid/ecoleplus-ui
 ```
 
-After installing the package, you can publish the assets:
+After installing the package, you can publish the configuration:
 
 ```bash
 php artisan vendor:publish --provider="EcolePlus\EcolePlusUi\EcolePlusUiServiceProvider"
@@ -45,6 +45,26 @@ module.exports = {
         './vendor/amsaid/ecoleplus-ui/resources/**/*.blade.php',
         // ...
     ],
+    darkMode: 'class', // Enable dark mode support
+    theme: {
+        extend: {
+            colors: {
+                primary: {
+                    50: '#f0f9ff',
+                    100: '#e0f2fe',
+                    200: '#bae6fd',
+                    300: '#7dd3fc',
+                    400: '#38bdf8',
+                    500: '#0ea5e9',
+                    600: '#0284c7',
+                    700: '#0369a1',
+                    800: '#075985',
+                    900: '#0c4a6e',
+                    950: '#082f49',
+                },
+            },
+        },
+    },
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
@@ -52,26 +72,20 @@ module.exports = {
 }
 ```
 
-2. Import the CSS in your main stylesheet:
-
-```css
-@import 'vendor/amsaid/ecoleplus-ui/resources/css/components.css';
-```
-
 ## Available Components
 
 ### Button
 
 ```blade
-<x-eplus-button type="button" variant="primary">
+<x-eplus::button type="button" variant="primary">
     Click me
-</x-eplus-button>
+</x-eplus::button>
 ```
 
 ### Input
 
 ```blade
-<x-eplus-input 
+<x-eplus::input 
     name="email"
     label="Email Address"
     type="email"
@@ -81,49 +95,95 @@ module.exports = {
 ### Card
 
 ```blade
-<x-eplus-card header="Card Title" footer="Card Footer">
+<x-eplus::card>
+    <x-slot:header>Card Title</x-slot:header>
     Card content goes here
-</x-eplus-card>
+    <x-slot:footer>Card Footer</x-slot:footer>
+</x-eplus::card>
+```
+
+### Card Section
+
+```blade
+<x-eplus::card>
+    <x-eplus::card-section 
+        title="Section Title"
+        description="Optional section description"
+    >
+        Section content goes here
+    </x-eplus::card-section>
+</x-eplus::card>
 ```
 
 ### Alert
 
 ```blade
-<x-eplus-alert type="success" title="Success!" dismissible>
+<x-eplus::alert type="success" title="Success!" dismissible>
     Operation completed successfully.
-</x-eplus-alert>
+</x-eplus::alert>
 ```
 
 ### Badge
 
 ```blade
-<x-eplus-badge type="primary" rounded>
+<x-eplus::badge variant="primary" size="md">
     New
-</x-eplus-badge>
+</x-eplus::badge>
 ```
 
-### Avatar
+### Textarea
 
 ```blade
-<x-eplus-avatar 
-    src="path/to/image.jpg"
-    size="md"
-    status="online"
+<x-eplus::textarea 
+    name="description"
+    label="Description"
+    rows="4"
+    hint="Maximum 500 characters"
 />
 ```
 
-### Dropdown
+### Select
 
 ```blade
-<x-eplus-dropdown>
-    <x-slot:trigger>
-        <x-eplus-button>Options</x-eplus-button>
-    </x-slot:trigger>
-    
-    <a href="#" class="block px-4 py-2 text-sm">Option 1</a>
-    <a href="#" class="block px-4 py-2 text-sm">Option 2</a>
-</x-eplus-dropdown>
+<x-eplus::select 
+    name="country"
+    label="Select Country"
+    :options="[
+        'us' => 'United States',
+        'uk' => 'United Kingdom'
+    ]"
+    placeholder="Choose a country"
+/>
 ```
+
+## Dark Mode Support
+
+All components support dark mode out of the box. To enable dark mode in your application:
+
+1. Make sure your `tailwind.config.js` has dark mode enabled:
+
+```js
+module.exports = {
+    darkMode: 'class',
+    // ...
+}
+```
+
+2. Toggle dark mode by adding/removing the `dark` class to your HTML element:
+
+```js
+// Using Alpine.js
+<html x-data="{ dark: false }" :class="{ 'dark': dark }">
+
+// Or using plain JavaScript
+document.documentElement.classList.toggle('dark')
+```
+
+Components will automatically adjust their styling in dark mode, providing:
+- Appropriate contrast ratios
+- Readable text colors
+- Softer background colors
+- Consistent visual hierarchy
 
 ## Documentation
 

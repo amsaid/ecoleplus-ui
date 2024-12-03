@@ -4,9 +4,6 @@ namespace EcolePlus\EcolePlusUi\Tests\Components;
 
 use EcolePlus\EcolePlusUi\Tests\TestCase;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ViewErrorBag;
-use Illuminate\Support\MessageBag;
 
 test('input component can be rendered', function () {
     $view = Blade::render('<x-eplus::input name="test" class="custom" />');
@@ -14,62 +11,57 @@ test('input component can be rendered', function () {
     expect($view)
         ->toContain('input')
         ->toContain('name="test"')
-        ->toContain('eplus-input')
+        ->toContain('block w-full rounded-md')
         ->toContain('custom');
 });
 
 test('input component shows label when provided', function () {
-    $view = Blade::render('<x-eplus::input name="email" label="Email Address" />');
+    $view = Blade::render('<x-eplus::input name="test" label="Test Label" />');
 
     expect($view)
-        ->toContain('label')
-        ->toContain('Email Address')
-        ->toContain('eplus-input-label');
+        ->toContain('Test Label')
+        ->toContain('label');
 });
 
 test('input component shows hint when provided', function () {
-    $view = Blade::render('<x-eplus::input name="email" :hint="\'We will never share your email.\'" />');
+    $view = Blade::render('<x-eplus::input name="test" hint="Test hint" />');
 
     expect($view)
-        ->toContain('We will never share your email.')
-        ->toContain('text-sm text-gray-500');
+        ->toContain('Test hint')
+        ->toContain('text-gray-500');
 });
 
 test('input component shows error state', function () {
-    $view = Blade::render('<x-eplus::input name="email" error />');
+    $view = Blade::render('<x-eplus::input name="test" error="Test error" />');
 
     expect($view)
-        ->toContain('eplus-input-error');
+        ->toContain('Test error')
+        ->toContain('text-red-600')
+        ->toContain('border-red-300');
+});
+
+test('input component shows validation error message', function () {
+    $view = Blade::render('<x-eplus::input name="test" error="Field is required" />');
+
+    expect($view)
+        ->toContain('Field is required')
+        ->toContain('text-red-600');
 });
 
 test('input component shows icon when provided', function () {
-    $view = Blade::render('<x-eplus::input name="email" icon="heroicon-o-envelope" />');
+    $view = Blade::render('<x-eplus::input name="test" icon="heroicon-m-envelope" />');
 
     expect($view)
-        ->toContain('heroicon-o-envelope')
+        ->toContain('svg')
+        ->toContain('absolute inset-y-0')
         ->toContain('text-gray-400');
 });
 
 test('input component accepts different types', function () {
-    $view = Blade::render('<x-eplus::input name="password" type="password" />');
+    $view = Blade::render('<x-eplus::input name="test" type="email" />');
 
     expect($view)
-        ->toContain('type="password"');
-});
-
-test('input component shows validation error message', function () {
-    $errors = new ViewErrorBag;
-    $messageBag = new MessageBag;
-    $messageBag->add('email', 'The email field is required.');
-    $errors->put('default', $messageBag);
-
-    View::share('errors', $errors);
-
-    $view = Blade::render('<x-eplus::input name="email" />');
-
-    expect($view)
-        ->toContain('The email field is required.')
-        ->toContain('text-red-600');
+        ->toContain('type="email"');
 });
 
 test('input component merges attributes', function () {
