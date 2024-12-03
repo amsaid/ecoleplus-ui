@@ -24,9 +24,9 @@ use Ecoleplus\EcoleplusUi\Components\{
     Avatar,
     Tabs,
     Tab,
-    TabPanel,
     Progress,
-    Toast
+    Toast,
+    Icon
 };
 
 class EcoleplusUiServiceProvider extends PackageServiceProvider
@@ -64,7 +64,7 @@ class EcoleplusUiServiceProvider extends PackageServiceProvider
                 Avatar::class,
                 Tabs::class,
                 Tab::class,
-                TabPanel::class,
+                Icon::class,
                 Progress::class,
                 Toast::class
             )
