@@ -38,17 +38,19 @@
     $currentSize = $sizes[$size] ?? $sizes['md'];
 @endphp
 
-<div x-data="{ checked: @js($checked) }">
+<div x-data="{ checked: @js($checked) }" x-modelable="checked">
     <input
         type="checkbox"
-        name="{{ $name }}"
-        id="{{ $id }}"
-        value="{{ $value }}"
-        class="sr-only"
+        {{ $attributes->merge([
+            'name' => $name,
+            'id' => $id,
+            'value' => $value,
+            'disabled' => $disabled,
+            'class' => 'sr-only',
+        ])->whereDoesntStartWith('wire:model') }}
         :checked="checked"
-        @disabled($disabled)
         @change="checked = $event.target.checked"
-        {{ $attributes->except(['class']) }}
+        x-ref="input"
     />
 
     <div class="flex items-start">

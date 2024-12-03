@@ -29,10 +29,13 @@
     <div class="relative">
         <input
             type="{{ $type }}"
-            {{ $attributes->merge([
+            {{ $attributes->class([
+                $baseClasses,
+                $errorClasses => $hasError,
+                'pl-10' => $icon
+            ])->merge([
                 'id' => $id,
                 'name' => $name,
-                'class' => $baseClasses . ($hasError ? ' ' . $errorClasses : '') . ($icon ? ' pl-10' : '')
             ]) }}
         />
 

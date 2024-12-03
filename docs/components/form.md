@@ -2,6 +2,26 @@
 
 EcolePlus UI provides a set of form components that are styled with Tailwind CSS and follow accessibility best practices.
 
+## Livewire Support
+
+All form components support Livewire's `wire:model` directive out of the box. You can use any of the `wire:model` variants:
+
+```blade
+<x-eplus::input wire:model="name" />
+<x-eplus::checkbox wire:model="terms" />
+<x-eplus::radio wire:model="color" value="red" />
+<x-eplus::toggle wire:model="notifications" />
+```
+
+The components also support Livewire's real-time validation with error states:
+
+```blade
+<x-eplus::input
+    wire:model="email"
+    :error="$errors->first('email')"
+/>
+```
+
 ## Checkbox
 
 The checkbox component provides a styled checkbox input with support for labels, error states, and dark mode.

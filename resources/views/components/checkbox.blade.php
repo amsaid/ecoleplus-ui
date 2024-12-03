@@ -10,25 +10,26 @@
 
 @php
     $id = $id ?? $name;
-    $inputClasses = 'rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-700 dark:checked:border-primary-500 dark:checked:bg-primary-500 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800';
-    if ($error) {
-        $inputClasses .= ' border-red-300 focus:border-red-300 focus:ring-red-200';
-    }
-    if ($disabled) {
-        $inputClasses .= ' opacity-50 cursor-not-allowed';
-    }
+    $baseClasses = 'rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-700 dark:checked:border-primary-500 dark:checked:bg-primary-500 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800';
+    $errorClasses = 'border-red-300 focus:border-red-300 focus:ring-red-200';
+    $disabledClasses = 'opacity-50 cursor-not-allowed';
 @endphp
 
 <div class="flex items-start">
     <div class="flex items-center h-5">
         <input
             type="checkbox"
-            name="{{ $name }}"
-            id="{{ $id }}"
-            value="{{ $value }}"
+            {{ $attributes->class([
+                $baseClasses,
+                $errorClasses => $error,
+                $disabledClasses => $disabled,
+            ])->merge([
+                'name' => $name,
+                'id' => $id,
+                'value' => $value,
+                'disabled' => $disabled,
+            ])->whereDoesntStartWith('wire:model') }}
             @checked($checked)
-            @disabled($disabled)
-            {{ $attributes->merge(['class' => $inputClasses]) }}
         />
     </div>
 
