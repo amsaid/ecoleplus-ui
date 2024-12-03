@@ -1,21 +1,16 @@
 <?php
-
+// Components/Tab.php
 namespace Ecoleplus\EcoleplusUi\Components;
 
 class Tab extends BaseComponent
 {
-    /**
-     * Create a new component instance.
-     */
     public function __construct(
         public string $name,
-        public bool $selected = false
+        public bool $selected = false,
+        public ?string $style = null
     ) {
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): \Illuminate\View\View
     {
         return view('ecoleplus-ui::components.tab', [
@@ -23,14 +18,18 @@ class Tab extends BaseComponent
         ]);
     }
 
-    /**
-     * Get the panel classes
-     */
     protected function getPanelClasses(): string
     {
+        $parentTabs = $this->closest('ecp-tabs');
+
         return $this->mergeClasses([
             $this->getDefaultClasses('tabs.panel', 'base'),
-            $this->getDefaultClasses('tabs.panel', 'default'),
+            $this->getDefaultClasses('tabs.panel.orientation',
+                $parentTabs->orientation ?? 'horizontal'
+            ),
+            $this->style
+                ? $this->getDefaultClasses('tabs.panel.styles', $this->style)
+                : '',
         ]);
     }
 }

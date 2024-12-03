@@ -10,6 +10,9 @@
     id="tab-panel-{{ $name }}"
     aria-labelledby="tab-{{ $name }}"
     x-cloak
+    @if($lazy)
+    x-if="selected === '{{ $name }}'"
+    @endif
     {{ $attributes->merge(['class' => $baseClasses]) }}
 >
     {{ $slot }}
