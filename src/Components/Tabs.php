@@ -5,38 +5,61 @@ namespace Ecoleplus\EcoleplusUi\Components;
 class Tabs extends BaseComponent
 {
     /**
-     * Available styles.
+     * The currently selected tab name
+     *
+     * @var string|null
      */
-    const STYLES = ['pills', 'underline'];
+    public $selected;
 
     /**
-     * Available orientations.
+     * The visual style of the tabs (underline|pills)
+     *
+     * @var string
      */
-    const ORIENTATIONS = ['horizontal', 'vertical'];
+    public $style;
 
     /**
-     * Create a new component instance.
+     * The orientation of the tabs (horizontal|vertical)
+     *
+     * @var string
+     */
+    public $orientation;
+
+    /**
+     * Whether to sync the selected tab with the URL hash
+     *
+     * @var bool
+     */
+    public $urlHash;
+
+    /**
+     * Whether to lazy load tab content
+     *
+     * @var bool
+     */
+    public $lazy;
+
+    /**
+     * Initialize the component
+     *
+     * @param string|null $selected Initial selected tab
+     * @param string $style Visual style of tabs
+     * @param string $orientation Tab orientation
+     * @param bool $urlHash Whether to sync with URL hash
+     * @param bool $lazy Whether to lazy load content
      */
     public function __construct(
-        public string $style = 'underline',
-        public string $orientation = 'horizontal'
+        string $selected = null,
+        string $style = 'underline',
+        string $orientation = 'horizontal',
+        bool $urlHash = false,
+        bool $lazy = false
     ) {
-        if (!in_array($this->style, self::STYLES)) {
-            $this->style = 'underline';
-        }
-
-        if (!in_array($this->orientation, self::ORIENTATIONS)) {
-            $this->orientation = 'horizontal';
-        }
-
-        $this->defaultClasses = [
-            $this->getDefaultClasses('tabs', 'base'),
-        ];
-
-        // Add style-specific base classes if they exist
-        if ($baseClasses = $this->getDefaultClasses('tabs', 'styles.'.$this->style.'.base')) {
-            $this->defaultClasses[] = $baseClasses;
-        }
+        $this->selected = $selected;
+        $this->style = $style;
+        $this->orientation = $orientation;
+        $this->urlHash = $urlHash;
+        $this->lazy = $lazy;
     }
 
     /**
@@ -46,36 +69,37 @@ class Tabs extends BaseComponent
      */
     public function render()
     {
-        return view('ecoleplus-ui::components.tabs');
+        $baseClasses = $this->getDefaultClasses('tabs', 'base');
+        $styleClasses = $this->getDefaultClasses('tabs.styles.' . $this->style, 'base');
+        $orientationClasses = $this->getDefaultClasses('tabs.orientation', $this->orientation);
+
+        return view('ecoleplus-ui::components.tabs', [
+            'baseClasses' => $this->mergeClasses([
+                $baseClasses,
+                $styleClasses,
+                $orientationClasses,
+            ]),
+        ]);
     }
 
     /**
-     * Get all the computed classes for the tabs.
+     * Get the classes for a tab button
      *
+     * @param bool $isActive Whether the tab is active
      * @return string
      */
-    public function classes(): string
+    public function getTabClasses($isActive = false): string
     {
-        return $this->mergeClasses($this->defaultClasses);
-    }
+        $classes = [
+            $this->getDefaultClasses('tabs', 'tab'),
+            $this->getDefaultClasses('tabs.styles.' . $this->style, 'tab'),
+        ];
 
-    /**
-     * Get the list wrapper classes.
-     *
-     * @return string
-     */
-    public function listClasses(): string
-    {
-        return $this->getDefaultClasses('tabs', 'orientation.'.$this->orientation);
-    }
+        if ($isActive) {
+            $classes[] = $this->getDefaultClasses('tabs', 'tab_active');
+            $classes[] = $this->getDefaultClasses('tabs.styles.' . $this->style, 'tab_active');
+        }
 
-    /**
-     * Get the panel wrapper classes.
-     *
-     * @return string
-     */
-    public function panelWrapperClasses(): string
-    {
-        return $this->getDefaultClasses('tabs', 'panel.'.$this->orientation);
+        return $this->mergeClasses($classes);
     }
-} 
+}

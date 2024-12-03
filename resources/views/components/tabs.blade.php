@@ -1,28 +1,40 @@
-<div x-data="{
-    selectedTab: null,
-    init() {
-        // Initialize with first tab
-        this.$nextTick(() => {
-            const firstTab = this.$refs.tabs.querySelector(&#34;[role='tab']&#34;)
-            this.selectedTab = firstTab?.id
-        })
-    },
-    isSelected(id) {
-        return this.selectedTab === id
-    },
-    selectTab(id) {
-        this.selectedTab = id
-    }
-}" {{ $attributes->merge(['class' => $classes()]) }}>
-    {{-- Tab List --}}
-    <div x-ref="tabs" role="tablist" class="flex {{ $listClasses() }}">
+<div
+    x-data="{
+        selected: '{{ $selected }}',
+        init() {
+            // URL hash sync
+            if ({{ $urlHash ? 'true' : 'false' }}) {
+                this.selected = window.location.hash.substring(1) || '{{ $selected }}';
+                this.$watch('selected', value => {
+                    window.location.hash = value;
+                });
+            }
+        }
+    }"
+    {{ $attributes->merge(['class' => $baseClasses]) }}
+>
+    {{-- Tabs Navigation --}}
+    <div
+        role="tablist"
+        class="flex {{ $orientation === 'vertical' ? 'flex-col' : '' }}"
+        @keydown.right.prevent="$focus.wrap().next()"
+        @keydown.left.prevent="$focus.wrap().previous()"
+        @keydown.home.prevent="$focus.first()"
+        @keydown.end.prevent="$focus.last()"
+    >
         {{ $tabs }}
     </div>
 
-    {{-- Tab Panels --}}
-    <div class="{{ $panelWrapperClasses() }}">
-        {{ $panels }}
+    {{-- Tabs Content --}}
+    <div class="relative">
+        {{ $slot }}
+    </div>
+
+    {{-- Optional Loading Indicator --}}
+    <div
+        x-show="loading"
+        class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50"
+    >
+        <x-ecp-spinner />
     </div>
 </div>
-
-@props(['style' => 'underline', 'orientation' => 'horizontal'])

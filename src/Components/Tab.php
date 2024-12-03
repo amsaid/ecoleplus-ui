@@ -5,18 +5,29 @@ namespace Ecoleplus\EcoleplusUi\Components;
 class Tab extends BaseComponent
 {
     /**
-     * The tab ID.
+     * The unique identifier for the tab
      *
      * @var string
      */
-    public string $id;
+    public $name;
 
     /**
-     * Create a new component instance.
+     * Whether this tab is initially selected
+     *
+     * @var bool
      */
-    public function __construct(string $id)
+    public $selected;
+
+    /**
+     * Initialize the component
+     *
+     * @param string $name Tab identifier
+     * @param bool $selected Whether initially selected
+     */
+    public function __construct(string $name, bool $selected = false)
     {
-        $this->id = $id;
+        $this->name = $name;
+        $this->selected = $selected;
     }
 
     /**
@@ -26,45 +37,15 @@ class Tab extends BaseComponent
      */
     public function render()
     {
-        return view('ecoleplus-ui::components.tab');
+        $baseClasses = $this->getDefaultClasses('tabs.panel', 'base');
+        $orientationClasses = $this->getDefaultClasses('tabs.panel',
+            $this->getAttribute('orientation', 'horizontal'));
+
+        return view('ecoleplus-ui::components.tab', [
+            'baseClasses' => $this->mergeClasses([
+                $baseClasses,
+                $orientationClasses,
+            ]),
+        ]);
     }
-
-    /**
-     * Get the tab button classes.
-     *
-     * @return string
-     */
-    public function tabClasses($style = 'underline'): string
-    {
-        $classes = [
-            $this->getDefaultClasses('tabs', 'tab'),
-        ];
-
-        // Add style-specific classes if they exist
-        if ($styleClasses = $this->getDefaultClasses('tabs', 'styles.'.$style.'.tab')) {
-            $classes[] = $styleClasses;
-        }
-
-        return $this->mergeClasses($classes);
-    }
-
-    /**
-     * Get the active tab classes.
-     *
-     * @return string
-     */
-    public function activeTabClasses($style = 'underline'): string
-    {
-        $classes = [
-            $this->tabClasses(),
-            $this->getDefaultClasses('tabs', 'tab_active'),
-        ];
-
-        // Add style-specific active classes if they exist
-        if ($styleActiveClasses = $this->getDefaultClasses('tabs', 'styles.'.$style.'.tab_active')) {
-            $classes[] = $styleActiveClasses;
-        }
-
-        return $this->mergeClasses($classes);
-    }
-} 
+}

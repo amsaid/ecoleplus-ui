@@ -175,12 +175,12 @@ return [
             ],
             'orientation' => [
                 'horizontal' => 'flex-row space-x-2',
-                'vertical' => 'flex-col space-y-2',
+                'vertical' => ' flex-col space-y-2',
             ],
             'panel' => [
                 'base' => 'focus:outline-none',
                 'horizontal' => 'mt-4',
-                'vertical' => 'mt-0 ml-4',
+                'vertical' => 'mt-0 ml-40',
             ],
         ],
         'progress' => [
