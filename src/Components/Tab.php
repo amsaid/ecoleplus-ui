@@ -19,6 +19,7 @@ class Tab extends BaseComponent
     {
         return view('ecoleplus-ui::components.tab', [
             'baseClasses' => $this->getPanelClasses(),
+            'lazy' => $this->getContext('lazy', false),
         ]);
     }
 

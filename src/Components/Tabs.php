@@ -20,6 +20,7 @@ class Tabs extends BaseComponent
             '_context' => [
                 'style' => $this->style,
                 'orientation' => $this->orientation,
+                'lazy' => $this->lazy,
             ]
         ]);
         return view('ecoleplus-ui::components.tabs', [
