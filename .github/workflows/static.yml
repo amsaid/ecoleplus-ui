@@ -30,5 +30,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction
 
+      - name: Create build directory
+        run: mkdir -p build/phpstan
+
       - name: Run PHPStan
-        run: ./vendor/bin/phpstan analyse 
+        run: composer analyse

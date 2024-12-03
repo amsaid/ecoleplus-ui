@@ -1,3 +1,6 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
 parameters:
     level: 8
     paths:
@@ -5,5 +8,14 @@ parameters:
         - tests
     excludePaths:
         - vendor/*
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+    tmpDir: build/phpstan
+    checkOctaneCompatibility: true
+    checkModelProperties: true
     checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false 
+
+    # Laravel specific settings
+    noUnnecessaryCollectionCall: true
+    noUnnecessaryCollectionCallOnly: true
+    checkModelProperties: true 
