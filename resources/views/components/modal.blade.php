@@ -15,9 +15,23 @@ $maxWidth = [
 ][$maxWidth];
 @endphp
 
-<template x-teleport="body">
+<template 
+    x-teleport="body"
+    x-data="{ 
+        show: @js($show),
+        open() {
+            this.show = true;
+            this.$dispatch('modal-opened', { name: '{{ $name }}' });
+        },
+        close() {
+            this.show = false;
+            this.$dispatch('modal-closed', { name: '{{ $name }}' });
+        }
+    }"
+    x-on:open-modal.window="$event.detail === '{{ $name }}' ? open() : null"
+    x-on:close-modal.window="$event.detail === '{{ $name }}' ? close() : null"
+>
     <div
-        x-data="{ show: @js($show) }"
         x-modelable="show"
         x-on:close.stop="show = false"
         x-on:keydown.escape.window="show = false"
