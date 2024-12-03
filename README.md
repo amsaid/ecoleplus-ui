@@ -93,6 +93,9 @@ module.exports = {
 - [Input](docs/components/input.md) - Text input with validation
 - [Textarea](docs/components/textarea.md) - Multi-line text input
 - [Select](docs/components/select.md) - Dropdown select component
+- [Checkbox](docs/components/form.md#checkbox) - Checkbox input with label
+- [Radio](docs/components/form.md#radio) - Radio input with label
+- [Toggle](docs/components/form.md#toggle) - Switch/toggle input with label
 
 ### Layout Components
 - [Card](docs/components/card.md) - Content container

@@ -3,6 +3,41 @@ type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type Variant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
 type Align = 'left' | 'right' | 'center';
 
+// Checkbox Component
+export interface CheckboxProps {
+    name: string;
+    id?: string;
+    label?: string;
+    value?: string;
+    error?: string;
+    checked?: boolean;
+    disabled?: boolean;
+}
+
+// Radio Component
+export interface RadioProps {
+    name: string;
+    id?: string;
+    label?: string;
+    value: string;
+    error?: string;
+    checked?: boolean;
+    disabled?: boolean;
+}
+
+// Toggle Component
+export interface ToggleProps {
+    name: string;
+    id?: string;
+    label?: string;
+    description?: string;
+    value?: string;
+    error?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+}
+
 // Button Component
 export interface ButtonProps {
     type?: 'button' | 'submit' | 'reset';
